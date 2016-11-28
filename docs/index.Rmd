@@ -11,7 +11,7 @@
 
   <title>
     
-      404: Page not found &middot; RCDS
+      RCDS &middot; Environment and Society: Data Sciences for the 21st Century
     
   </title>
 
@@ -59,7 +59,7 @@
         
       
         
-          <a class="sidebar-nav-item" href="/rcds//index.Rmd">Home</a>
+          <a class="sidebar-nav-item active" href="/rcds//index.Rmd">Home</a>
         
       
         
@@ -79,10 +79,17 @@
 
 
     <div class="content container">
-      <div class="page">
-  <h1 class="page-title">404: Page not found</h1>
-  <p class="lead">Sorry, we've misplaced that URL or it's pointing to something that doesn't exist. <a href="/rcds/">Head back home</a> to try finding it again.</p>
-</div>
+      Welcome
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+plot(rnorm(10), rnorm(10))
+```
+
 
     </div>
 

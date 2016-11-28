@@ -1,0 +1,11 @@
+machine:
+  services:
+    - docker
+
+test:
+  override:
+    - docker run -ti -v $(pwd):/data -w /data cboettig/labnotebook R -e 'servr::jekyll(serve=FALSE)'
+
+deployment:
+    commands: 
+    - git fetch --unshallow && git add docs/ && git commit -m 'site updated'  && git push https://${CIRCLE_USERNAME}:${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} master > /dev/null

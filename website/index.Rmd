@@ -1,0 +1,17 @@
+---
+layout: default
+title: Home
+nav: true
+---
+
+Welcome
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+plot(rnorm(10), rnorm(10))
+```
+

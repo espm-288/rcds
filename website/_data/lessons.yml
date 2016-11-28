@@ -6,11 +6,8 @@
 - title: 'Git'
   language: 'R'
   reading: 'R-git' 
-  assignment: 'r-git' 
   lecture: 'R-git' 
 - title: 'knitr'
   language: 'R'
   reading: 'R-knitr' 
-  assignment: 'r-knitr' 
-  lecture: 'R-knitr' 
 
