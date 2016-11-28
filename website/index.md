@@ -4,36 +4,18 @@ title: Home
 nav: true
 ---
 
-Welcome
+Welcome, testing Rmd
 
 
 
-```r
-library(tidyverse)
-```
-
-```
-## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr
-```
-
-```
-## Conflicts with tidy packages ----------------------------------------------
-```
-
-```
-## filter(): dplyr, stats
-## lag():    dplyr, stats
-```
+{% highlight r %}
+library("tidyverse")
+{% endhighlight %}
 
 
-```r
+{% highlight r %}
 plot(rnorm(10), rnorm(10))
-```
+{% endhighlight %}
 
-![plot of chunk unnamed-chunk-2](/figure/./index/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-2](/rcds/figure/./index/unnamed-chunk-2-1.png)
 

@@ -4,11 +4,11 @@ title: Home
 nav: true
 ---
 
-Welcome
+Welcome, testing Rmd
 
 
-```{r}
-library(tidyverse)
+```{r message=FALSE}
+library("tidyverse")
 ```
 
 ```{r}

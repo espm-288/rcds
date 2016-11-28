@@ -79,11 +79,11 @@
 
 
     <div class="content container">
-      Welcome
+      Welcome, testing Rmd
 
 
-```{r}
-library(tidyverse)
+```{r message=FALSE}
+library("tidyverse")
 ```
 
 ```{r}
