@@ -1,3 +1,11 @@
+markdown:         kramdown
+highlighter:      rouge
+
+kramdown:
+    input:        GFM
+
+permalink:        pretty
+
 # Setup
 title:            'Reproducible and Collaborative Data Science' 
 tagline:          'Environment and Society: Data Sciences for the 21st Century'
