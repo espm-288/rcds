@@ -7,9 +7,9 @@ kramdown:
 permalink:        pretty
 
 # Setup
-title:            'Reproducible and Collaborative Data Science' 
+title:            'RCDS' 
 tagline:          'Environment and Society: Data Sciences for the 21st Century'
-description:      'A UC Berkeley graduate student course in data science'
+description:      'Reproducible and Collaborative Data Science'
 url:              'https://ds421.github.com/rcds'
 baseurl:          '/rcds/'
 
