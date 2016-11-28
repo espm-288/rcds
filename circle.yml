@@ -3,7 +3,8 @@ machine:
     - docker
 
 test:
-  override: > # > means multi-line command in yaml
+  override: 
+    - > # > means multi-line command in yaml
       docker run -ti -v $(pwd):/data -w /data cboettig/labnotebook \
       R -e "dirs = list.dirs(recursive=FALSE, full.names=FALSE); servr::jekyll('website', serve=FALSE, input = dirs, output = dirs)"
 
