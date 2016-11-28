@@ -11,7 +11,7 @@ title:            'Reproducible and Collaborative Data Science'
 tagline:          'Environment and Society: Data Sciences for the 21st Century'
 description:      'A UC Berkeley graduate student course in data science'
 url:              https://ds421.github.com/rcds
-baseurl:          /
+baseurl:          /rcds
 
 author:
   name:           'Carl Boettiger'
