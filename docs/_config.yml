@@ -1,11 +1,3 @@
-# Dependencies
-markdown:         kramdown 
-highlighter:      pygments
-
-# Permalinks
-permalink:        pretty
-relative_permalinks: true
-
 # Setup
 title:            'Reproducible and Collaborative Data Science' 
 tagline:          'Environment and Society: Data Sciences for the 21st Century'
@@ -16,11 +8,6 @@ baseurl:          /
 author:
   name:           'Carl Boettiger'
   url:            http://carlboettiger.info
-
-paginate:         5
-
-# Custom vars
-version:          2.1.0
 
 github:
   repo:           https://github.com/ds421/rcds
