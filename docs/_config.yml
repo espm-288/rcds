@@ -10,12 +10,12 @@ permalink:        pretty
 title:            'Reproducible and Collaborative Data Science' 
 tagline:          'Environment and Society: Data Sciences for the 21st Century'
 description:      'A UC Berkeley graduate student course in data science'
-url:              https://ds421.github.com/rcds
-baseurl:          /rcds
+url:              'https://ds421.github.com/rcds'
+baseurl:          '/rcds/'
 
 author:
   name:           'Carl Boettiger'
-  url:            http://carlboettiger.info
+  url:            'http://carlboettiger.info'
 
 github:
-  repo:           https://github.com/ds421/rcds
+  repo:           'https://github.io/ds421/rcds'
