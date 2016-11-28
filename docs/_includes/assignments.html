@@ -1,0 +1,43 @@
+<table>
+
+  <tr>
+    <th width="50">Week</th>
+    <th width="500">Lesson</th>
+    <th width="50">Reading</th>
+    <th width="50">Lecture</th>
+    <th width="50">Assignment</th>
+  </tr>
+
+  {% for lesson in site.data.lessons %}
+    <tr>
+      <td align="right">{{ forloop.index }}</td>
+      <td>{{ lesson.title }}</td>
+
+      {%if lesson.reading %}
+      <td align="center"><a href="{{ site.baseurl }}/readings/{{ lesson.reading }}">
+          <i class="fa fa-book fa-lg"></i></a></td>
+      {% else %}
+        <td align="center"><font color="f1f1f1">
+          <i class="fa fa-book fa-lg"></i></font></td>
+      {% endif %}
+
+      {%if lesson.lecture %}
+      <td align="center"><a href="{{ site.baseurl }}/lectures/{{ lesson.lecture  }}">
+          <i class="fa fa-comment fa-lg"></i></a></td>
+      {% else %}
+        <td align="center"><font color="f1f1f1">
+          <i class="fa fa-comment fa-lg"></i></font></td>
+      {% endif %}
+
+      {%if lesson.assignment %}
+      <td align="center"><a href="{{ site.baseurl }}/assignments/{{ lesson.assignment }}">
+          <i class="fa fa-keyboard-o fa-lg"></i></a></td>
+      {% else %}
+        <td align="center"><font color="f1f1f1">
+          <i class="fa fa-keyboard-o fa-lg"></i></font></td>
+      {% endif %}
+    </tr>
+
+  {% endfor %}
+
+</table>

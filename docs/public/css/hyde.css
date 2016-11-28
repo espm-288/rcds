@@ -248,3 +248,15 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
 }
+
+
+/* Berkeley */
+.theme-base-berkeley .sidebar {
+  background-color: #003262;
+}
+.theme-base-0d .content a,
+.theme-base-0d .related-posts li a:hover {
+  color: #003262;
+}
+
+

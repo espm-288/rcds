@@ -11,7 +11,7 @@ title:            'RCDS'
 tagline:          'Environment and Society: Data Sciences for the 21st Century'
 description:      'Reproducible and Collaborative Data Science'
 url:              'https://ds421.github.com/rcds'
-baseurl:          '/rcds/'
+baseurl:          '/rcds'
 
 author:
   name:           'Carl Boettiger'
@@ -19,3 +19,11 @@ author:
 
 github:
   repo:           'https://github.io/ds421/rcds'
+
+collections: 
+  main:
+    output: true
+    permalink: /:name
+  lessons:
+    output: true
+
