@@ -4,7 +4,7 @@ machine:
 
 test:
   override:
-    - docker run -ti -v $(pwd):/data -w /data cboettig/labnotebook R -e 'servr::jekyll(serve=FALSE)'
+    - docker run -ti -v $(pwd):/data -w /data cboettig/labnotebook R -e "servr::jekyll('website', serve=FALSE)"
 
 deployment:
   prod:
