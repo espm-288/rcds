@@ -5,7 +5,7 @@ set -e
 ## Commits changes to `docs/` directory only
 ## CIRCLE env vars are automatically set, but user must add their GH_TOKEN to Circle CI
 
-if [ -e ".git/shallow"]
+if [ -e ".git/shallow" ]
 then
   git config user.name 'Circle CI' && \
   git config user.email 'bot@circleci.com'
