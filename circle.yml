@@ -10,4 +10,4 @@ deployment:
   prod:
     branch: master
     commands: 
-    - git config user.name 'Circle CI' && git config user.email 'bot@circleci.com' && git fetch --unshallow && git add docs/ && git commit -m 'site updated'  && git push https://${CIRCLE_USERNAME}:${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} master > /dev/null
+    - git config user.name 'Circle CI' && git config user.email 'bot@circleci.com' && git fetch --unshallow && git add docs/ && git commit -m 'site built on circle ci [ci skip]'  && git push https://${CIRCLE_USERNAME}:${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} master > /dev/null
