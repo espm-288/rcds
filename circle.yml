@@ -4,10 +4,11 @@ machine:
 
 test:
   override:
-    - docker run -ti -v $(pwd):/data -w /data cboettig/labnotebook R -e "servr::jekyll('website', serve=FALSE)"
+    - docker run -ti -v $(pwd):/data -w /data cboettig/labnotebook \
+      R -e "dirs = list.dirs(recursive=FALSE, full.names=FALSE); servr::jekyll('website', serve=FALSE, input = dirs, output = dirs)"
 
 deployment:
   prod:
     branch: master
     commands: 
-    - git config user.name 'Circle CI' && git config user.email 'bot@circleci.com' && git fetch --unshallow && git add docs/ && git commit -m 'site built on circle ci [ci skip]'  && git push https://${CIRCLE_USERNAME}:${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} master > /dev/null
+    - wget -qO- https://gist.githubusercontent.com/cboettig/86a97437e74cd1bb128280a967570a18/raw/d6794fec58ce7fe1189af091b46b48a4c44b5a27/circle-github-deploy.sh | bash 
