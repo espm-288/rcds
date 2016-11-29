@@ -4,12 +4,10 @@ machine:
 
 test:
   override: 
-    - docker build -t rcds .
-    - docker run -ti -v $(pwd):/home/rstudio rcds
+    - docker run -ti -v $(pwd):/home/rstudio -e SERVE=FALSE cboettig/rcds
 
 deployment:
   prod:
     branch: master
     commands: 
       - ./circle-github-deploy.sh
-      #    - wget -qO- https://gist.githubusercontent.com/cboettig/86a97437e74cd1bb128280a967570a18/raw/6ffed5cd4bf6bc5f5570e66965b374d6816810b5/circle-github-deploy.sh | bash 

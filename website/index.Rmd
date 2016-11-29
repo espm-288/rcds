@@ -9,9 +9,15 @@ Welcome, testing Rmd
 
 ```{r message=FALSE}
 library("tidyverse")
+library("servr")
 ```
 
 ```{r}
 plot(rnorm(10), rnorm(10))
 ```
 
+```{r}
+1+1
+```
+
+Some text here
