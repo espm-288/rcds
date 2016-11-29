@@ -1,13 +1,23 @@
-- title: 'Introduction'
-  language: 'R'
-  reading: 'R-intro' 
-  assignment: 'r-intro' 
-  lecture: 'R-intro' 
-- title: 'Git'
-  language: 'R'
-  reading: 'R-git' 
-  lecture: 'R-git' 
-- title: 'knitr'
-  language: 'R'
-  reading: 'R-knitr' 
-
+- title: "Introduction"
+  lecture: "intro"
+- title: "Infrastructure: Rmd Notebooks & GitHub"
+  topics: "knitr, Github"
+  lecture: "infrastruture"
+- title: "Global Climate Change Module: Introduction"
+  assignment: "climate-intro" 
+  lecture: "climate-intro"
+  topics: "data parsing, visualization"
+- title: "Global Climate Change Module: Week 2"
+- title: "Global Climate Change Module: Week 3"
+- title: "Population Dynamics Module: Week 1"
+  topics: "functions, loops"
+- title: "Population Dynamics Module: Week 2"
+- title: "Population Dynamics Module: Week 3"
+- title: "Fisheries Collapse Module: Week 1"
+  topics: "Relational databases"
+- title: "Fisheries Collapse Module: Week 2"
+- title: "Extinction Rates Module: Week 1"
+- title: "Extinction Rates Module: Week 2"
+- title: "Special topics: Docker & Cloud Computing"
+- title: "Special topics: R packages & Reproducible papers" 
+- title: "Final projects"
