@@ -1,0 +1,16 @@
+---
+layout: default
+title: Home
+---
+
+Welcome, testing Rmd
+
+
+```{r message=FALSE}
+library("tidyverse")
+```
+
+```{r}
+plot(rnorm(10), rnorm(10))
+```
+

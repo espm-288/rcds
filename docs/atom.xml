@@ -2,10 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>RCDS</title>
+<<<<<<< HEAD
  <link href="https://ds421.github.io/rcds/atom.xml" rel="self"/>
  <link href="https://ds421.github.io/rcds/"/>
  <updated>2016-11-29T00:51:11+00:00</updated>
  <id>https://ds421.github.io/rcds</id>
+=======
+ <link href="https://ds421.github.com/rcds/atom.xml" rel="self"/>
+ <link href="https://ds421.github.com/rcds/"/>
+ <updated>2016-11-28T23:14:49+00:00</updated>
+ <id>https://ds421.github.com/rcds</id>
+>>>>>>> defd853d6c36c0219c14bf4c95a49e9cf3d8045b
  <author>
    <name>Carl Boettiger</name>
    <email></email>
