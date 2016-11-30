@@ -17,8 +17,7 @@
         `layout: page` in the front-matter. See readme for usage.
       {% endcomment %}
 
-      {% assign pages_list = site.pages %}
-      {% for node in pages_list %}
+      {% for node in site.pages %}
         {% if node.nav %}
           <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a>
         {% endif %}
@@ -26,8 +25,8 @@
 
     </nav>
     <p>
-      <a rel="license" property="http://creativecommons.org/ns#license" href="http://creativecommons.org/licenses/by/4.0/" ><img src="{{site.baseurl}}/public/img/cc-by.svg" alt="cc-by"/></a>
       <a href="{{ site.github.repo }}"><i class="fa fa-github"></i></a>
+      <a rel="license" property="http://creativecommons.org/ns#license" href="http://creativecommons.org/licenses/by/4.0/" ><img src="{{site.baseurl}}/public/img/cc-by.svg" alt="cc-by"/></a>
     </p>
   </div>
 </div>

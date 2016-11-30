@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Course Policies & Information 
-
+title: Course Policies
+nav: true
 ---
 
 
