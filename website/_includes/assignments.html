@@ -13,10 +13,7 @@
     <tr>
       <td align="right">{{ forloop.index }}</td>
       <td>{{ lesson.title }}</td>
-
-      <td align="right">{{ forloop.index }}</td>
       <td>{{ lesson.topics }}</td>
-
 
       {%if lesson.reading %}
       <td align="center"><a href="{{ site.baseurl }}/readings/{{ lesson.reading }}">
