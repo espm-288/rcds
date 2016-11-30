@@ -1,18 +1,24 @@
+---
+layout: page
+title: Assignment Schedule
+nav: true
+---
+
 <table>
 
   <tr>
-    <th width="50">Week</th>
-    <th width="400">Lesson</th>
-    <th width="400">Topics</th>
-    <th width="50">Reading</th>
-    <th width="50">Lecture</th>
-    <th width="50">Assignment</th>
+    <th style="width:5%">Week</th>
+    <th style="width:40%">Lesson</th>
+    <th style="width:25%">Topics</th>
+    <th style="width:10%">Reading</th>
+    <th style="width:10%">Lecture</th>
+    <th style="width:10%">Assignment</th>
   </tr>
 
   {% for lesson in site.data.lessons %}
     <tr>
       <td align="right">{{ forloop.index }}</td>
-      <td>{{ lesson.title }}</td>
+      <td><b>{{ lesson.title }}<b/></td>
       <td>{{ lesson.topics }}</td>
 
       {%if lesson.reading %}
