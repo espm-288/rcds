@@ -12,12 +12,12 @@ then
   git config user.name 'Circle CI' && \
   git config user.email 'bot@circleci.com'
   git fetch --unshallow 
-  git add docs/ website/ && \
-  git commit -m 'site built on circle ci [ci skip]'
+  git add -A && \
+  git commit -m 'site built on circle ci [ci skip]' || echo "No changes to commit"
   STATUS=`git push https://${CIRCLE_USERNAME}:${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} master`
 else 
-  git add docs/ website/ && \
-  git commit -m 'site built locally[ci skip]' &&
+  git add -A && \
+  git commit -m 'site built locally[ci skip]' || echo "No changes to commit"
   git push
 fi
 
