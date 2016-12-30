@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Assignment Schedule
+title: Course Schedule
 nav: true
 ---
 
@@ -22,7 +22,7 @@ nav: true
       <td>{{ lesson.topics }}</td>
 
       {%if lesson.reading %}
-      <td align="center"><a href="{{ site.baseurl }}/readings/{{ lesson.reading }}">
+      <td align="center"><a href="{{ lesson.reading }}">
           <i class="fa fa-book fa-lg"></i></a></td>
       {% else %}
         <td align="center"><font color="f1f1f1">
