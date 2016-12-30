@@ -118,8 +118,8 @@ There are no quizzes or exams in this course.
 ## Course Technology
 
 Students are required to provide their own laptops and to install free
-and open source software on those laptops (see [Setup](/setup)) for installation
-instructions). Support will be provided by the instructor in the
+and open source software on those laptops. 
+Support will be provided by the instructor in the
 installation of required software. If you don’t have access to a
 laptop please contact the instructor and they will do their best to
 provide you with one.
