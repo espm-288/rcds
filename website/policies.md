@@ -43,8 +43,8 @@ should be submitted as instructed.
 
 Grades will be assigned using the following weighted components:
 
-| Final Project  | 50% |
-| HW Exercises   | 40% |
+| Final Project  | 30% |
+| HW Exercises   | 60% |
 | Participation  | 10% |
 
 Details of grading criteria will not usually be announced in advance. It is expected
