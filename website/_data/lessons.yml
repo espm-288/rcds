@@ -10,7 +10,7 @@
 - title: "Climate Change: Intro"
   date: "2017-02-03"
   reading: "http://r4ds.had.co.nz/explore-intro.html"
-  assignment: "climate-intro" 
+  #assignment: "climate-intro" 
   #  lecture: "climate-intro"
   topics: "data exploration, visualization"
 - title: "Climate Change 2"
