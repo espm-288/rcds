@@ -2,8 +2,8 @@
 
 set -e
 
-## Committing changes to `website/` (source) dir saves intermediate .md files, so servr doesn't re-knit .Rmds if these already exist.
-## Committing changes to `docs/` (output dir) alone updates website but will not save intermediate .md files, re-knit .Rmds each time
+## `git add website/ docs/` (source) dir saves intermediate .md files, so servr doesn't re-knit .Rmds if these already exist.
+## Committing with `git add docs/` (output dir) alone updates website but will not save intermediate .md files, re-knit .Rmds each time
 
 ## CIRCLE env vars are automatically set, but user must add their GH_TOKEN to Circle CI
 
