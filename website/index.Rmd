@@ -5,18 +5,25 @@ nav: true
 ---
 
 
-Instructor
-: [Carl Boettiger](http://carlboettiger.info)
+           |    
+---------- | ------------------------------------------
+Instructor | [Carl Boettiger](http://carlboettiger.info) <a href="mailto:cboettig@gmail.com" title="email"><i class="fa fa-envelope"></i></a><a href="https://twitter.com/cboettig" title="Twitter"><i class="fa fa-twitter"></i></a> <a href="https://github.com/cboettig" title="GitHub"><i class="fa fa-github"></i></a>
+GSI        | [Kari Norman](mailto:kari.norman.314@gmail.com) <a href="mailto:kari.norman.314@gmail.com" title="email"><i class="fa fa-envelope"></i></a><a href="https://github.com/karinorman" title="GitHub"><i class="fa fa-github"></i></a>
+Location   | **2063** Valley Life Sciences Building
+Times      | **Tu 9:00A-9:59A, F 1:00P-2:59P**
+CCN        | 33807
 
-Location
-: 2063 Valley Life Sciences 
 
-Times
-: Tu 9:00A-9:59A, F 1:00P-2:59P
+## Announcements
 
-CCN
-: 33807
+- You will need to bring a laptop to class.  Please contact me if this will be an issue.
 
+- Have RStudio, the `tidyverse` R package, and git installed before class. Contact myself or the GSI with any issues.
+
+- Also, you will need to register for a (free) account at GitHub.com, and let us know your GitHub username [here](https://docs.google.com/a/berkeley.edu/forms/d/e/1FAIpQLScGfha3l_l8sBRgOILbEflGlChOOqvg44sXOa5ZVgsbRPMpIg/viewform)
+
+
+# ESPM 290: Reproducible and Collaborative Data Science
 
 This course provides an introduction to principles and tools for
 reproducible and collaborative data science; including data curation

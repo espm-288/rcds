@@ -22,7 +22,7 @@ The simplest way to build locally is to install Docker and run:
 Build & view site on localhost:
 
 ```bash
-# docker run -d -p 4000:4000 -v $(pwd):/home/rstudio cboettig/rcds
+docker run -d -p 4000:4000 -v $(pwd):/home/rstudio cboettig/rcds
 ```
 
 Build site into docs/
