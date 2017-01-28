@@ -24,7 +24,7 @@ nav: true
       <td>{{ lesson.topics }}</td>
 
       {%if lesson.reading %}
-      <td align="center"><a href="{{ lesson.reading }}">
+      <td align="center"><a href="{{ site.baseurl }}/readings/{{ lesson.reading }}">
           <i class="fa fa-book fa-lg"></i></a></td>
       {% else %}
         <td align="center"><font color="f1f1f1">
