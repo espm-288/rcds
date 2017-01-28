@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reproducible &amp; Collaborative Data Science: An Introduction</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="intro-slides_files/rmdshower/node_modules/shower-ribbon/styles/screen-4x3.css">
+  <link rel="stylesheet" href="intro-slides_files/rmdshower/style-common.css">
+  <link rel="stylesheet" href="intro-slides_files/rmdshower/style-ribbon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+  <script src="intro-slides_files/rmdshower/auto-render.min.js" type="text/javascript"></script>
+  
+  
+  
+  
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>Reproducible &amp; Collaborative Data Science: An Introduction</h1>
+    <p>Carl Boettiger</p>
+  </header>
+
+    
+  
+<section id="me" class="slide level2">
+<h2>Me</h2>
+<p><i class="fa fa-user"></i> Carl Boettiger</p>
+<p><i class="fa fa-twitter"></i> @<a href="https://twitter.com/cboettig">cboettig</a></p>
+<p><i class="fa fa-globe"></i> <a href="https://carlboettiger.info" class="uri">https://carlboettiger.info</a></p>
+<ul>
+<li class="fragment next">theoretical ecologist</li>
+<li class="fragment next">&lt;rOpenSci.org&gt;</li>
+<li class="fragment next">Data Science education</li>
+</ul>
+</section>
+<section id="data-science-training" class="slide level2">
+<h2>Data Science training</h2>
+<ul>
+<li><a href="http://ds421.berkeley.edu">ds421.berkeley.edu</a></li>
+<li><a href="databears.berkeley.edu">UC Berkeley Undergraduate Curriculum</a></li>
+<li><a href="https://nsf.gov/funding/pgm_summ.jsp?pims_id=505161&amp;org=NSF&amp;sel_org=NSF&amp;from=fund">NSF RFP for Data Science Education</a></li>
+<li>NCEAS Working group</li>
+<li>…</li>
+</ul>
+</section>
+<section id="data-science" class="titleslide slide level1"><h2 class="shout">Data Science</h2></section><section id="so-what-is-data-science-anyway" class="slide level2">
+<h2>So, what is data science anyway?</h2>
+<h3 id="statistics-on-a-mac">Statistics on a Mac</h3>
+<p><img src="img/mac.png" /></p>
+</section><section id="what-is-data-science" class="slide level2">
+<h2>What is Data Science?</h2>
+<p><img src="img/drewconway.png" /></p>
+</section><section id="visions-of-data-science" class="slide level2">
+<h2>Visions of Data Science</h2>
+<ul>
+<li>Donoho <a href="https://dl.dropboxusercontent.com/u/23421017/50YearsDataScience.pdf">“50 years of data science”</a></li>
+</ul>
+</section><section id="the-two-cultures-statistics-or-machine-learning" class="slide level2">
+<h2>“The Two Cultures?” Statistics or Machine Learning</h2>
+<div class="double">
+<p class="double-flow">
+<ul>
+<li>Generative / inferrential modeling</li>
+<li>Predictive modeling (&amp; CTF)</li>
+</ul>
+<p>Leo Breiman (2001) <a href="http://dx.doi.org/10.1214/ss/1009213726" class="uri">http://dx.doi.org/10.1214/ss/1009213726</a></p>
+<p><strong><em>Data Science (&amp; this course) involve both.</em></strong></p>
+</p>
+<p class="double-flow">
+<p><img src="img/leo_breiman.jpg" /></p>
+</p>
+</div>
+</section><section id="bill-clevelands-vision" class="slide level2">
+<h2>Bill Cleveland’s vision</h2>
+<p><a href="http://dx.doi.org/10.1111/j.1751-5823.2001.tb00477.x"><em>Data Science: An Action Plan for Expanding the Technical Areas of the field of Statistics</em> (2001)</a></p>
+<ul>
+<li>Multidisciplinary investigations (25%)</li>
+<li>Models and Methods for Data (20%)</li>
+<li>Computing with Data (15%)</li>
+<li>Pedagogy (15%)</li>
+<li>Tool Evaluation (5%)</li>
+<li>Theory (20%)</li>
+</ul>
+<p><a href="http://dx.doi.org/10.1111/j.1751-5823.2001.tb00477.x" class="uri">http://dx.doi.org/10.1111/j.1751-5823.2001.tb00477.x</a></p>
+</section><section id="donohos-greater-data-science" class="slide level2">
+<h2>Donoho’s “Greater Data Science”</h2>
+<ol type="1">
+<li>Data Exploration and Preparation*</li>
+<li>Data Representation and Transformation*</li>
+<li>Computing with Data</li>
+<li>Data Modeling</li>
+<li>Data Visualization and Presentation</li>
+<li>Science about Data Science*</li>
+</ol>
+</section><section id="related-subsumed-movementsideas" class="slide level2">
+<h2>Related &amp; subsumed movements/ideas</h2>
+<ul>
+<li class="fragment next">Computational Science</li>
+<li class="fragment next">Big Data</li>
+<li class="fragment next">Reproducible Research</li>
+<li class="fragment next">Open Science</li>
+</ul>
+</section><section id="computational-science" class="slide level2">
+<h2>Computational Science</h2>
+<ul>
+<li class="fragment next">HPC-centric but not software-centric</li>
+<li class="fragment next">Ed Lazowksa: “will future of academic data science be like computer science or computational science?”</li>
+</ul>
+</section><section id="big-data" class="slide level2">
+<h2>Big Data</h2>
+<ul>
+<li class="fragment next">Big Data = stuff breaks (3 Vs)</li>
+<li class="fragment next">Volume: Breaks your RAM, your harddrive</li>
+<li class="fragment next">Velocity: Breaks your network cable</li>
+<li class="fragment next">Variety: Breaks everything else</li>
+<li class="fragment next">Machine learning</li>
+</ul>
+</section><section id="reproducible-research" class="slide level2">
+<h2>Reproducible research</h2>
+<p>More to say later, but likewise a movement both distinct from and largely pre-dating “Data Science” but now very much part of ‘greater data science’ vision.</p>
+</section><section id="open-science" class="slide level2">
+<h2>Open Science</h2>
+<ul>
+<li class="fragment next">Open Access</li>
+<li class="fragment next">Open Data</li>
+<li class="fragment next">Open Code</li>
+</ul>
+</section><section id="colloborative-reproducible" class="slide level2">
+<h2>Colloborative &amp; Reproducible</h2>
+<ul>
+<li>Collaboration &amp; Reproducibility are core elements of “Greater” (sensu Donoho) Data Science.</li>
+</ul>
+</section>
+<section id="collaborative-reproducible" class="titleslide slide level1"><h2 class="shout">Collaborative &amp; Reproducible</h2></section><section id="collaborative" class="slide level2">
+<h2>Collaborative</h2>
+<p>You will:</p>
+<ul>
+<li class="fragment next">Learn by doing</li>
+<li class="fragment next">Work in pairs on all assignments</li>
+<li class="fragment next">Critique, edit &amp; extend work of other pairs</li>
+<li class="fragment next">Learn from everyone here and beyond</li>
+</ul>
+</section><section id="collaborative-1" class="slide level2">
+<h2>Collaborative</h2>
+<p>So what’s to be learned? Don’t we already know how to collaborate?</p>
+<ul>
+<li class="fragment next">Yourself, <span class="math inline">\(n\)</span> months from now</li>
+<li class="fragment next">Colleagues in the same room</li>
+<li class="fragment next">Remote &amp; asynchronous collaborators</li>
+<li class="fragment next">Anonymous collaboration: scientific publishing, open source software, forums, etc</li>
+</ul>
+<p>Involves:</p>
+<ul>
+<li class="fragment next">Technical skills</li>
+<li class="fragment next">Communication skills: code as prose</li>
+</ul>
+</section><section id="reproducible" class="slide level2">
+<h2>Reproducible</h2>
+<p>Fundamental to science…</p>
+</section><section id="section" class="slide level2 cover">
+<h2></h2>
+<p><img src="images/economist/cover.jpg" class="cover height"></p>
+</section><section id="section-1" class="slide level2 cover">
+<h2></h2>
+<p><img src="images/economist/replicate.jpg" class="cover width"></p>
+</section><section id="section-2" class="slide level2 cover">
+<h2></h2>
+<p><img src="images/economist/rug.jpg" class="cover height"></p>
+</section><section id="section-3" class="slide level2 cover">
+<h2></h2>
+<p><img src="images/economist/trouble.jpg" class="cover width"></p>
+</section><section id="reproducible-1" class="slide level2">
+<h2>Reproducible</h2>
+<p>… But not primarily for that reason.</p>
+</section><section id="reproducible-2" class="slide level2">
+<h2>Reproducible</h2>
+<ul>
+<li class="fragment next">Replication is fundamental to understanding &amp; extending existing work</li>
+<li class="fragment next">Most analyses today have lots of free parameters</li>
+<li class="fragment next">Making efficient to explore the road(s) not taken</li>
+</ul>
+<!--  Replication study in race bias in soccer penalties -->
+</section>
+<section id="this-course" class="titleslide slide level1"><h2 class="shout">This course</h2></section><section id="course-pedagogy" class="slide level2">
+<h2>Course Pedagogy</h2>
+<p>Some things in this course are in keeping with good / leading pedagogy</p>
+<ul>
+<li class="fragment next">We will start with graphs first</li>
+<li class="fragment next">active learning, flipped classroom model</li>
+</ul>
+<p>And some things aren’t</p>
+<ul>
+<li class="fragment next">Starting on the deep end</li>
+<li class="fragment next">We will start with untidy data</li>
+<li class="fragment next">unstructured training</li>
+</ul>
+</section><section id="course-content-data-science-as-process" class="slide level2">
+<h2>Course Content: Data Science as Process</h2>
+<p><img src="http://r4ds.had.co.nz/diagrams/data-science-wrangle.png" /></p>
+</section><section id="data-cleaning" class="slide level2">
+<h2>Data cleaning</h2>
+<p><img src="img/datacleaning.jpg" /></p>
+</section><section id="analysis-modeling" class="slide level2">
+<h2>Analysis &amp; Modeling</h2>
+<ul>
+<li class="fragment next">Traditionally the 80%</li>
+<li class="fragment next">Computational implementations have made this much easier</li>
+<li class="fragment next">And led to an explosion of new methods &amp; tools</li>
+</ul>
+</section><section id="intentional-proccess-intentional-programming" class="slide level2">
+<h2>Intentional Proccess = Intentional Programming</h2>
+</section><section id="course-motto" class="slide level2">
+<h2>Course motto</h2>
+<blockquote>
+<p>Write code for people. Write data for computers</p>
+<p>– <a href="http://www.vincebuffalo.com/">Vince Buffalo</a>, UC Davis c 2015</p>
+</blockquote>
+<ul>
+<li class="fragment next">a key difference in perspective between <em>computational science</em> and <em>data science</em>.</li>
+<li class="fragment next">central to our themes of reproducibility and collaboration.</li>
+</ul>
+</section><section id="final-project" class="slide level2">
+<h2>Final Project</h2>
+<ul>
+<li class="fragment next">Will also be collaborative (pairs).</li>
+<li class="fragment next">You can do one or two separate analyses, but both partners must have input on everything</li>
+<li class="fragment next">Hopefully relevant to your thesis research</li>
+<li class="fragment next">Start thinking about projects early</li>
+</ul>
+</section><section id="our-toolbox" class="slide level2">
+<h2>Our Toolbox</h2>
+<ul>
+<li class="fragment next">R, RStudio</li>
+<li class="fragment next">tidyverse</li>
+<li class="fragment next">git, GitHub</li>
+</ul>
+<p>Other things you’ll see, mostly a bit later on</p>
+<ul>
+<li class="fragment next">Docker, cloud computing</li>
+<li class="fragment next">some bash shell (for general background, git, remote computing)</li>
+<li class="fragment next">some python (for comparison)</li>
+<li class="fragment next">SQL, JSON</li>
+</ul>
+</section><section id="language-why-r" class="slide level2">
+<h2>Language: Why R?</h2>
+<ul>
+<li class="fragment next">Not about the technical attributes</li>
+<li class="fragment next">Pick your language based on what people in your area speak/code</li>
+<li class="fragment next">Python vs R: closely analogous feature set; lots of interesting differences to discuss over beer</li>
+</ul>
+</section><section id="why-tidyverse" class="slide level2">
+<h2>Why tidyverse?</h2>
+<ul>
+<li class="fragment next"><a href="https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html">tidyverse manifesto</a></li>
+<li class="fragment next">Consistent design, parallels tools in other languages (Python/pandas, SQL)</li>
+<li class="fragment next">Significant adoption in the data science community</li>
+<li class="fragment next">Pick your language based on what people in your area speak/code</li>
+</ul>
+</section><section id="why-git" class="slide level2">
+<h2>Why git?</h2>
+<ul>
+<li class="fragment next">GitHub.com</li>
+<li class="fragment next">Pick your language based on what people in your area speak/code</li>
+<li class="fragment next">Very powerful but often convoluted syntax, see <a href="http://stevelosh.com/blog/2013/04/git-koans/" class="uri">http://stevelosh.com/blog/2013/04/git-koans/</a></li>
+<li class="fragment next">Widely used == easier to get help</li>
+</ul>
+</section><section id="our-textbooks" class="slide level2">
+<h2>Our textbook(s)</h2>
+<ul>
+<li class="fragment next"><a href="http://r4ds.had.co.nz/">R for Data Science</a></li>
+<li class="fragment next"><a href="http://adv-r.had.co.nz/">Advanced R</a> Mostly Chapters 1-6 Additional online resources &amp; scientific data repositories</li>
+</ul>
+</section><section id="coding-style" class="slide level2">
+<h2>Coding Style</h2>
+<p><em>Write code for people</em></p>
+<ul>
+<li class="fragment next"><a href="http://adv-r.had.co.nz/Style.html">Style Guide</a></li>
+<li class="fragment next">On writing literate code: <a href="http://r4ds.had.co.nz/workflow-basics.html">Worflow Basics</a></li>
+<li class="fragment next">Some bits can be automated (mostly whitespace) <a href="https://cran.r-project.org/web/packages/formatR/">formatR</a></li>
+</ul>
+</section>
+<section id="the-road-ahead" class="titleslide slide level1"><h2 class="shout">The Road Ahead</h2></section><section id="modules" class="slide level2">
+<h2>Modules</h2>
+<ul>
+<li class="fragment next">Global Climate Change (Data exploration &amp; visualization)</li>
+<li class="fragment next">Popluation Dynamics (Programming: functions, loops)</li>
+<li class="fragment next">Fisheries Collapse (databases)</li>
+<li class="fragment next">Extinctions (APIs, regex)</li>
+<li class="fragment next">Final project</li>
+</ul>
+</section><section id="module-flow" class="slide level2">
+<h2>Module flow</h2>
+<ul>
+<li class="fragment next">Week 1: Introduction, live code examples, getting started</li>
+<li class="fragment next">Week 2: Pair work on assignment; mini-tutorials</li>
+<li class="fragment next">Week 3: Present / compare / discuss solutions</li>
+</ul>
+</section><section id="climate-change" class="slide level2">
+<h2>Climate Change</h2>
+<ul>
+<li class="fragment next">Data parsing</li>
+<li class="fragment next">Data visualization</li>
+<li class="fragment next">Basic data wrangling</li>
+<li class="fragment next">Workflow</li>
+</ul>
+</section><section id="population-dynamics" class="slide level2">
+<h2>Population Dynamics</h2>
+<ul>
+<li class="fragment next">programming: loops, conditionals, functions</li>
+<li class="fragment next">ecological simulation</li>
+<li class="fragment next">dynamical systems modeling, ODE &amp; SDE simulations, bifurcation analysis, chaos, bet hedging</li>
+</ul>
+</section><section id="fisheries-collapse" class="slide level2">
+<h2>Fisheries Collapse</h2>
+<ul>
+<li class="fragment next">Working with multiple tables/tibbles</li>
+<li class="fragment next">SQL databases, relational data</li>
+</ul>
+</section><section id="extinctions" class="slide level2">
+<h2>Extinctions</h2>
+<ul>
+<li class="fragment next">Online data, REST APIs</li>
+<li class="fragment next">JSON &amp; extensible data formats</li>
+<li class="fragment next">Regular Expressions (RegEx)</li>
+</ul>
+</section><section id="course-policies" class="slide level2">
+<h2>Course Policies</h2>
+<p><a href="https://ds421.github.io/rcds/policies" class="uri">https://ds421.github.io/rcds/policies</a></p>
+</section><section id="rmarkdown" class="slide level2">
+<h2>RMarkdown</h2>
+<p>Some history:</p>
+<ul>
+<li class="fragment next">Literate programming, Knuth’s <code>noweb</code>, weave/tangle</li>
+<li class="fragment next">Sweave, S &amp; R</li>
+<li class="fragment next">knitr</li>
+<li class="fragment next">markdown, RMarkdown, RStudio</li>
+</ul>
+</section><section id="getting-help" class="slide level2">
+<h2>Getting Help</h2>
+<ul>
+<li class="fragment next">Instructor, GSI, colleagues</li>
+<li class="fragment next">Course Discussion list: <a href="https://github.com/ds421/discussion/issues" class="uri">https://github.com/ds421/discussion/issues</a></li>
+<li class="fragment next">Googling error messages</li>
+<li class="fragment next">StackOverflow</li>
+<li class="fragment next">Interacting with tool developers: GitHub, gitter, etc</li>
+<li class="fragment next">Debugging strategies (more later)</li>
+</ul>
+</section><section id="the-art-of-a-good-question" class="slide level2">
+<h2>The art of a good question</h2>
+<ul>
+<li>Respect</li>
+<li>A “Minimal reproducible example”</li>
+<li>Include literal error messages and context, e.g. <code>sessionInfo()</code></li>
+</ul>
+<p><a href="http://stackoverflow.com/questions/5963269" class="uri">http://stackoverflow.com/questions/5963269</a></p>
+<p><a href="https://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/" class="uri">https://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/</a></p>
+<p><a href="https://jennybc.github.io/reprex/" class="uri">https://jennybc.github.io/reprex/</a></p>
+</section>
+<section id="setup-test-drive" class="titleslide slide level1"><h2 class="shout">Setup test drive</h2></section><section id="workflow-naming-things" class="slide level2">
+<h2>Workflow &amp; naming things</h2>
+<ul>
+<li>The two hard problems in computer science</li>
+</ul>
+</section><section id="githubrstudio-test-drive" class="slide level2">
+<h2>GitHub/RStudio test drive</h2>
+<ol type="1">
+<li>Confirm you have a respository on course GitHub, e.g. <a href="https://github.com/ds421/carl.boettiger">https://github.com/ds421/firstname.lastname</a></li>
+<li>If repo does not have a README, click to add a default README file.</li>
+<li>Open an issue on your own repository for “test drive”</li>
+<li>Launch RStudio</li>
+<li>From RStudio menu, open a new project from this existing git repository.</li>
+<li>Create a new RMarkdown document (use GitHub template)</li>
+<li>Knit your RMarkdown file</li>
+<li>Commit changes mentioning <code>closes issue #1</code>, and push back to repository</li>
+</ol>
+</section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="intro-slides_files/rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+    <script>renderMathInElement(document.body);</script>
+  
+  
+</body>
+</html>
