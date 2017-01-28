@@ -17,12 +17,10 @@ nav: true
 
 ## Announcements
 
-- You will need to bring a laptop to class.  Please contact me if this will be an issue.
+- Links for reading assingments have been updated with a bit more information.  Please see the new links for reading for next week.
 
-- Have RStudio, the `tidyverse` R package, and git installed before class. Contact myself or the GSI with any issues.
-
-- Also, you will need to register for a (free) account at GitHub.com, and let us know your GitHub username [here](https://docs.google.com/a/berkeley.edu/forms/d/e/1FAIpQLScGfha3l_l8sBRgOILbEflGlChOOqvg44sXOa5ZVgsbRPMpIg/viewform) (Berkeley login required).
-
+- Slides for intro lecture are now posted.
+  
 ## Course Description
 
 This course provides an introduction to principles and tools for
