@@ -4,6 +4,7 @@ author: You & Partner
 output: github_document
 ---
 
+[![](https://img.shields.io/badge/download-.Rmd-blue.svg)](https://github.com/ds421/rcds/raw/master/website/assignments/climate-assignment.Rmd)
 
 # Unit I: Climate Change Module
 
@@ -64,8 +65,8 @@ What additional analyses or data sources would better help you refine your argum
 
 # Exercise II: Melting Ice Sheets?
 
-- Data description: http://climate.nasa.gov/vital-signs/land-ice/
-- Raw data file: http://climate.nasa.gov/system/internal_resources/details/original/499_GRN_ANT_mass_changes.csv
+- Data description: <http://climate.nasa.gov/vital-signs/land-ice/>
+- Raw data file: <http://climate.nasa.gov/system/internal_resources/details/original/499_GRN_ANT_mass_changes.csv>
 
 ## Question 1:
 
@@ -85,8 +86,8 @@ Plot the data and describe the trends you observe.
 
 # Exercise III: Rising Sea Levels?
 
-- Data description: http://climate.nasa.gov/vital-signs/sea-level/
-- Raw data file: http://climate.nasa.gov/system/internal_resources/details/original/121_Global_Sea_Level_Data_File.txt
+- Data description: <http://climate.nasa.gov/vital-signs/sea-level/>
+- Raw data file: <http://climate.nasa.gov/system/internal_resources/details/original/121_Global_Sea_Level_Data_File.txt>
 
 
 ## Question 1:
@@ -108,7 +109,7 @@ Plot the data and describe the trends you observe.
 
 # Exercise IV: Arctic Sea Ice?
 
-- http://nsidc.org/data/G02135
+- <http://nsidc.org/data/G02135>
 - <ftp://sidads.colorado.edu/DATASETS/NOAA/G02135/Sep/N_09_area.txt>
     
 
@@ -138,8 +139,8 @@ The data we analyzed in the unit introduction included CO2 records dating back o
 
 Vostok Core, back to 400,000 yrs before present day 
 
-- Description of data set: http://cdiac.esd.ornl.gov/trends/co2/vostok.html
-- Data source: http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2
+- Description of data set: <http://cdiac.esd.ornl.gov/trends/co2/vostok.html>
+- Data source: <http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2>
 
 ## Questions / Tasks:
 
