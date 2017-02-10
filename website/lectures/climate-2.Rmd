@@ -1,5 +1,5 @@
 ---
-title: Climate week 2
+title: "Climate week 2"
 ---
 
 Today we'll spend primarily working through assignment 1.  A few notes before we get started:
