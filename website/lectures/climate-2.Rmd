@@ -1,0 +1,25 @@
+---
+title: Climate week 2
+---
+
+Today we'll spend primarily working through assignment 1.  A few notes before we get started:
+
+## Something for everyone
+
+As we said at the start of the course, our goal is to start off by tossing you in the deep end.  We've got some pretty experienced folk, so we've had to toss pretty hard -- hopefully everyone is kicking water now.  Keep in mind that I am looking for somewhat different things depending on where we are all starting, which gives you and your partner a couple different possible strategies.
+
+### In deep water?
+
+Yay, data science usually feels like that for all of us.  So if this is all feeling really new: don't worry about getting everything done and everything perfect.  You have two possible stategies: 
+
+- **Breath first** try and work through as much as you can of each of the exercises, skipping anything you get stuck on (rolling averages, fancy plots, better formatted code).  This will get you the most practice reading in and maybe plotting different data; there will be time to master the data transformation `dplyr` stuff later, as well as making pretty output reports on GitHub.  
+
+- **Depth first** pick one or a few questions to get very polished. Pay attention to code style, ask about formatting tricks to make your output presentable, get solid on GitHub-RMarkdown thing.  
+
+Either way, ask questions and see what others are doing.  
+
+### Old hand?
+
+If 
+
+- RMarkdown workflow for GitHub
