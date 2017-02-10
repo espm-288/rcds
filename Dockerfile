@@ -6,7 +6,7 @@ WORKDIR /home/rstudio
 EXPOSE 4000
 ENV SERVE TRUE
 
-CMD Rscript -e "dirs = c('.', 'readings', 'assignments'); servr::jekyll('website', serve=$SERVE, input = dirs, output = dirs, host = '0.0.0.0', port=4000)"
+CMD Rscript -e "dirs = c('.', 'readings', 'assignments', 'lectures'); servr::jekyll('website', serve=$SERVE, input = dirs, output = dirs, host = '0.0.0.0', port=4000)"
 
 ## Build & view site on localhost:
 # docker run -d -p 4000:4000 -v $(pwd):/home/rstudio cboettig/rcds
