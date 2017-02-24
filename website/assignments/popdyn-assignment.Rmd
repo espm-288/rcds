@@ -36,13 +36,6 @@ data %>%
 
 
 
-We refer to writing down either equations or code that describe this population as a "model" of the population.  Mathematical models play a central role in almost all applications of data science, and come in many forms and serve many purposes.  
-
-In the Foundation core, you have recently encountered "linear models" and the regressions we use to estimate them from data.  
-
-$$x_{t+1} = x_t + x_t  f(x,y) $$
-$$y_{t+1} = y_t + y_t  g(x,y) $$
-
 
 
 
