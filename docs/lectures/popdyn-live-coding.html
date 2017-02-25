@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Population Dynamics Live Coding examples &middot; RCDS
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/rcds/public/css/poole.css">
+  <link rel="stylesheet" href="/rcds/public/css/syntax.css">
+  <link rel="stylesheet" href="/rcds/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/rcds/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/rcds/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });       </script>
+
+  
+</head>
+
+
+  <body class="theme-base-berkeley">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/rcds">
+          RCDS
+        </a>
+      </h1>
+      <p class="lead">Reproducible and Collaborative Data Science</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <!--      <a class="sidebar-nav-item" href="/rcds">Home</a> -->
+
+      
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/index.html">Home</a>
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/policies.html">Course Policies</a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/syllabus.html">Course Syllabus</a>
+        
+      
+
+    </nav>
+    <p>
+      <a href="https://github.com/ds421/rcds"><i class="fa fa-github"></i></a>
+      <a rel="license" property="http://creativecommons.org/ns#license" href="http://creativecommons.org/licenses/by/4.0/" ><img src="/rcds/public/img/cc-by.svg" alt="cc-by"/></a>
+    </p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <ul>
+  <li><a href="https://github.com/ds421/rcds/tree/master/website/lectures/popdyn-live-coding.Rmd">Download the .Rmd</a></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="s2">"tidyverse"</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Loading tidyverse: ggplot2
+## Loading tidyverse: tibble
+## Loading tidyverse: tidyr
+## Loading tidyverse: readr
+## Loading tidyverse: purrr
+## Loading tidyverse: dplyr</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Conflicts with tidy packages -----------------------------------------</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## filter(): dplyr, stats
+## lag():    dplyr, stats</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">f</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">){</span>
+    <span class="n">r</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="m">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+  <span class="p">}</span>
+
+
+<span class="n">simulation</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="m">10</span><span class="p">){</span>
+  
+  <span class="c1"># Initialize
+</span>  <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">numeric</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+  <span class="n">x</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">x1</span>
+
+  <span class="c1"># Simulate
+</span>  <span class="k">for</span><span class="p">(</span><span class="n">t</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="n">T</span><span class="m">-1</span><span class="p">)){</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="m">+1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+  <span class="p">}</span>
+  
+  <span class="n">data_frame</span><span class="p">(</span><span class="n">time</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">T</span><span class="p">,</span>  <span class="n">population</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">simulation</span><span class="p">(</span><span class="n">r</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>  <span class="o">%&gt;%</span>
+  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">population</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_line</span><span class="p">()</span></code></pre></div>
+
+<p><img src="/rcds/figure/lectures/popdyn-live-coding/unnamed-chunk-2-1.svg" alt="plot of chunk unnamed-chunk-2" /></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">simulation</span><span class="p">(</span><span class="n">r</span> <span class="o">=</span> <span class="m">2.5</span><span class="p">)</span>  <span class="o">%&gt;%</span>
+  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">population</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_line</span><span class="p">()</span></code></pre></div>
+
+<p><img src="/rcds/figure/lectures/popdyn-live-coding/unnamed-chunk-3-1.svg" alt="plot of chunk unnamed-chunk-3" /></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">K</span> <span class="o">&lt;-</span> <span class="m">100</span>
+<span class="n">r</span> <span class="o">&lt;-</span> <span class="m">2</span>
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="m">0</span><span class="o">:</span><span class="m">150</span>
+
+<span class="n">p1</span> <span class="o">&lt;-</span>
+<span class="n">data_frame</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">),</span> <span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_line</span><span class="p">()</span> <span class="o">+</span> <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">z</span><span class="p">),</span> <span class="n">lty</span><span class="o">=</span><span class="m">2</span><span class="p">)</span> 
+
+<span class="n">x0</span> <span class="o">&lt;-</span> <span class="m">0.2</span> <span class="o">*</span> <span class="n">K</span>
+<span class="n">Iter</span> <span class="o">&lt;-</span> <span class="m">10</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">Iter</span><span class="p">){</span>
+  <span class="n">x1</span> <span class="o">&lt;-</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+  <span class="n">df</span> <span class="o">&lt;-</span> 
+  <span class="n">tribble</span><span class="p">(</span><span class="o">~</span><span class="n">x</span><span class="p">,</span>  <span class="o">~</span><span class="n">y</span><span class="p">,</span>
+           <span class="n">x0</span><span class="p">,</span>   <span class="n">x0</span><span class="p">,</span>
+           <span class="n">x0</span><span class="p">,</span>   <span class="n">x1</span><span class="p">,</span>
+           <span class="n">x1</span><span class="p">,</span>   <span class="n">x1</span><span class="p">)</span> 
+  <span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">geom_line</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
+  <span class="n">x0</span> <span class="o">&lt;-</span> <span class="n">x1</span>
+<span class="p">}</span>
+    
+<span class="n">p1</span></code></pre></div>
+
+<p><img src="/rcds/figure/lectures/popdyn-live-coding/unnamed-chunk-4-1.svg" alt="plot of chunk unnamed-chunk-4" /></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">K</span> <span class="o">&lt;-</span> <span class="m">100</span>
+
+<span class="n">r_range</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">1.9</span><span class="p">,</span> <span class="m">3.5</span><span class="p">,</span> <span class="n">len</span> <span class="o">=</span> <span class="m">400</span><span class="p">)</span>
+
+<span class="n">burnin</span> <span class="o">&lt;-</span> <span class="m">100</span>
+<span class="n">T</span> <span class="o">&lt;-</span> <span class="m">200</span>
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="n">numeric</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">rsweep</span> <span class="o">&lt;-</span> <span class="n">numeric</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">&lt;-</span> <span class="n">K</span> <span class="o">*</span> <span class="m">0.2</span>
+
+<span class="n">df</span> <span class="o">&lt;-</span> 
+<span class="n">purrr</span><span class="o">::</span><span class="n">map_df</span><span class="p">(</span><span class="n">r_range</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">r</span><span class="p">){</span>
+  
+  <span class="k">for</span><span class="p">(</span><span class="n">t</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">burnin</span><span class="p">){</span>
+    <span class="n">state</span> <span class="o">&lt;-</span> <span class="n">f</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">for</span><span class="p">(</span><span class="n">t</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">T</span><span class="p">){</span>
+    <span class="n">state</span> <span class="o">&lt;-</span> <span class="n">f</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">rsweep</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">r</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">state</span>
+  <span class="p">}</span>
+  <span class="n">data_frame</span><span class="p">(</span><span class="n">r</span> <span class="o">=</span> <span class="n">rsweep</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span>
+  
+<span class="p">})</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span> <span class="o">%&gt;%</span>
+  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_point</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">0.05</span><span class="p">)</span></code></pre></div>
+
+<p><img src="/rcds/figure/lectures/popdyn-live-coding/unnamed-chunk-6-1.svg" alt="plot of chunk unnamed-chunk-6" /></p>
+
+    </div>
+
+  </body>
+</html>
