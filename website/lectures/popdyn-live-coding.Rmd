@@ -1,0 +1,104 @@
+---
+title: "Population Dynamics Live Coding examples"
+output: github_document
+---
+
+- [Download the .Rmd]()
+
+
+
+
+```{r}
+library("tidyverse")
+
+f <- function(x, r, K){
+    r * x * (1 - x / K) + x
+  }
+
+
+simulation <- function(r, K = 100, T = 100, x1 = 10){
+  
+  # Initialize
+  x <- numeric(T)
+  x[1] <- x1
+
+  # Simulate
+  for(t in 1:(T-1)){
+    x[t+1] <- f(x = x[t], r, K)
+  }
+  
+  data_frame(time = 1:T,  population = x)
+}
+```
+
+
+```{r}
+simulation(r = 2)  %>%
+  ggplot(aes(time, population)) + geom_line()
+```
+
+```{r}
+simulation(r = 2.5)  %>%
+  ggplot(aes(time, population)) + geom_line()
+```
+
+
+```{r}
+K <- 100
+r <- 2
+x <- 0:150
+
+p1 <-
+data_frame(x = x, y = f(x,r,K), z = x) %>%
+  ggplot(aes(x,y)) + geom_line() + geom_line(aes(y = z), lty=2) 
+
+x0 <- 0.2 * K
+Iter <- 10
+for(i in 1:Iter){
+  x1 <- f(x0, r, K)
+  df <- 
+  tribble(~x,  ~y,
+           x0,   x0,
+           x0,   x1,
+           x1,   x1) 
+  p1 <- p1 + geom_line(data = df, col="red")
+  x0 <- x1
+}
+    
+p1                
+
+
+```
+```{r}
+K <- 100
+
+r_range <- seq(1.9, 3.5, len = 400)
+
+burnin <- 100
+T <- 200
+x <- numeric(T)
+rsweep <- numeric(T)
+state <- K * 0.2
+
+df <- 
+purrr::map_df(r_range, function(r){
+  
+  for(t in 1:burnin){
+    state <- f(state, r, K)
+  }
+  for(t in 1:T){
+    state <- f(state, r, K)
+    rsweep[t] <- r
+    x[t] <- state
+  }
+  data_frame(r = rsweep, x = x)
+  
+})
+
+```
+
+```{r}
+df %>%
+  ggplot(aes(r, x)) + geom_point(size = 0.05)
+
+````
