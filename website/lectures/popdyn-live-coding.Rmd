@@ -3,7 +3,7 @@ title: "Population Dynamics Live Coding examples"
 output: github_document
 ---
 
-- [Download the .Rmd]()
+- [Download the .Rmd](https://github.com/ds421/rcds/tree/master/website/lectures/popdyn-live-coding.Rmd)
 
 
 
