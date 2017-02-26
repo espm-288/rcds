@@ -28,7 +28,7 @@
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
   
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });       </script>
 
   
@@ -166,15 +166,17 @@
   <li>Define the following mathematical functions in R:</li>
 </ol>
 
-<p><script type="math/tex">f(x,y) = a x - b y x</script>
-<script type="math/tex">g(x,y) = c x y - d y</script></p>
+<p>[ f(x,y) = a x - b y x ]</p>
+
+<p>[ g(x,y) = c x y - d y ]</p>
 
 <ol>
   <li>Write a loop to simulate the following dynamics using the above functions definitions:</li>
 </ol>
 
-<p><script type="math/tex">x_{t+1} = x_t + x_t  f(x,y) </script>
-<script type="math/tex">y_{t+1} = y_t + y_t  g(x,y) </script></p>
+<p>[ x_{t+1} = x_t + x_t  f(x,y) ]</p>
+
+<p>[ y_{t+1} = y_t + y_t  g(x,y) ]</p>
 
 <p>Use the following parameters to get started:</p>
 
@@ -186,7 +188,7 @@ d = .03
 T = 2000
 </code></p>
 
-<p>use initial value $x_0 = 30$ and $y_0 = 4$ to get started.</p>
+<p>use initial value (x_0 = 30) and (y_0 = 4) to get started.</p>
 
 <ol>
   <li>
@@ -203,10 +205,6 @@ T = 2000
   </li>
 </ol>
 
-<p>```python</p>
-
-<p>```</p>
-
 <h2 id="exercise-2-modifiying-the-model-carrying-capacity">Exercise 2: Modifiying the model: Carrying capacity</h2>
 
 <p>In the model in exercise 1, you observed that it was very difficult to create stable, regular cycles over a long period of time.  Instead, one population or the other was always spiralling out of control.  To avoid this very unrealistic result, we will now modify our model to add in further biological assumptions.</p>
@@ -217,7 +215,7 @@ T = 2000
   <li>re-define the function for hare population, <code>f(x,y)</code>, to reflect limits on growth due to a carrying capacity:</li>
 </ol>
 
-<script type="math/tex; mode=display">f(x,y) = a x (1 - x/K) - b y x </script>
+<p>[ f(x,y) = a x (1 - x/K) - b y x ]</p>
 
 <ol>
   <li>
@@ -235,12 +233,13 @@ T = 2000
 
 <p>Another limitation of our model is the ability of the Lynx population to consume hare at arbitrary effiency, regardless of how many hare we have.  Thus a very small initial number of lynx, <code>y</code> can almost immediately become as large as you like as long as there are enough hares. When prey is rare, we might well expect the survival and reproduction of a lynx to be directly proportional to the number of hare, $g(x,y) ~ c x y$, but beyond a certain point we expect additional hare not to matter so much.  Likewise, it may make sense to put an upper limit on how many hare a single lynx can catch.  We model this by introducing a “saturating” function:</p>
 
-<p>$h(x) = \frac{1}{S + x}$ to our equations for $f$ and $g$:  </p>
+<p>$h(x) = \frac{1}{S + x}$ to our equations for (f) and (g):  </p>
 
-<p><script type="math/tex"> f(x,y) = a x (1 - x / K)  - b y x h(x)</script>
-<script type="math/tex"> g(x,y) = c y x h(x) - d y</script></p>
+<p>[ f(x,y) = a x (1 - x / K)  - b y x h(x) ]</p>
 
-<p>Note that $h(x)$ is designed to have the following property:  when $x \ll S$, $h(x) ~ \frac{1}{S} = 1$, and is thus just a constant; independent of $x$.  Meanwhile, once $x \gg S$, then $h(x) ~ 1/x$. This cancels out the $x$ term in the products describing the death of hare ($b y x h(x)$) and growth of the Lynx ($c y x h(x)$) independent of $x$.  </p>
+<p>[ g(x,y) = c y x h(x) - d y ]</p>
+
+<p>Note that $h(x)$ is designed to have the following property:  when (x \ll S), (h(x) ~ \frac{1}{S} = 1), and is thus just a constant; independent of (x).  Meanwhile, once (x \gg S), then (h(x) ~ 1/x). This cancels out the $x$ term in the products describing the death of hare ((b y x h(x)) ) and growth of the Lynx ((c y x h(x))) independent of (x).  </p>
 
 <ol>
   <li>Introduce the above definition into your simulation, creating both phase portrait and time series plot.  Begin with the following parameter set:</li>
