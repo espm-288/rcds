@@ -19,7 +19,7 @@ We motivate this using an example of a classic data set that played a fundamenta
 Though we will focus on simulating our own data with `for` loops and functions, it is worth a moment to consider the oscillations observed in the real data, which we can access and plot using the now-familiar functions:
 
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
 data <- read_delim("https://raw.githubusercontent.com/bblais/Systems-Modeling-Spring-2015-Notebooks/master/data/Lynx%20and%20Hare%20Data/lynxhare.csv",
                 ";") 
@@ -43,17 +43,17 @@ data %>%
 
 1.  Define the following mathematical functions in R:
 
-\[ f(x,y) = a x - b y x \]
+\\[ f(x,y) = a x - b y x \\]
 
 
-\[ g(x,y) = c x y - d y \]
+\\[ g(x,y) = c x y - d y \\]
 
 2. Write a loop to simulate the following dynamics using the above functions definitions:
 
-\[ x_{t+1} = x_t + x_t  f(x,y) \]
+\\[ x_{t+1} = x_t + x_t  f(x,y) \\]
 
 
-\[ y_{t+1} = y_t + y_t  g(x,y) \]
+\\[ y_{t+1} = y_t + y_t  g(x,y) \\]
 
 Use the following parameters to get started:
 
@@ -65,7 +65,7 @@ d = .03
 T = 2000
 ```
 
-use initial value \(x_0 = 30\) and \(y_0 = 4\) to get started.
+use initial value \\(x_0 = 30\\) and \\(y_0 = 4\\) to get started.
 
 
 3. Create a plot showing the population sizes of hare (x) and lynx (y) over time.
@@ -87,7 +87,7 @@ In the model of exercise 1, the only thing limiting the growth of hare was the p
 
 1. re-define the function for hare population, `f(x,y)`, to reflect limits on growth due to a carrying capacity:
 
-\[ f(x,y) = a x (1 - x/K) - b y x \]
+\\[ f(x,y) = a x (1 - x/K) - b y x \\]
 
 2. Re-run your model and plots.  How have the results changed?  
 
@@ -98,15 +98,15 @@ In the model of exercise 1, the only thing limiting the growth of hare was the p
 
 ## Exercise 3: Limit Cycles
 
-Another limitation of our model is the ability of the Lynx population to consume hare at arbitrary effiency, regardless of how many hare we have.  Thus a very small initial number of lynx, `y` can almost immediately become as large as you like as long as there are enough hares. When prey is rare, we might well expect the survival and reproduction of a lynx to be directly proportional to the number of hare, $g(x,y) ~ c x y$, but beyond a certain point we expect additional hare not to matter so much.  Likewise, it may make sense to put an upper limit on how many hare a single lynx can catch.  We model this by introducing a "saturating" function:
+Another limitation of our model is the ability of the Lynx population to consume hare at arbitrary effiency, regardless of how many hare we have.  Thus a very small initial number of lynx, `y` can almost immediately become as large as you like as long as there are enough hares. When prey is rare, we might well expect the survival and reproduction of a lynx to be directly proportional to the number of hare, \\(g(x,y) ~ c x y\\), but beyond a certain point we expect additional hare not to matter so much.  Likewise, it may make sense to put an upper limit on how many hare a single lynx can catch.  We model this by introducing a "saturating" function:
 
-$h(x) = \frac{1}{S + x}$ to our equations for \(f\) and \(g\):  
+\\(h(x) = \frac{1}{S + x}\\) to our equations for \\(f\\) and \\(g\\):  
 
-\[ f(x,y) = a x (1 - x / K)  - b y x h(x) \]
+\\[ f(x,y) = a x (1 - x / K)  - b y x h(x) \\]
 
-\[ g(x,y) = c y x h(x) - d y \]
+\\[ g(x,y) = c y x h(x) - d y \\]
 
-Note that $h(x)$ is designed to have the following property:  when \(x \ll S\), \(h(x) ~ \frac{1}{S} = 1\), and is thus just a constant; independent of \(x\).  Meanwhile, once \(x \gg S\), then \(h(x) ~ 1/x\). This cancels out the $x$ term in the products describing the death of hare (\(b y x h(x)\) ) and growth of the Lynx (\(c y x h(x)\)) independent of \(x\).  
+Note that \\(h(x)\\) is designed to have the following property:  when \\(x \ll S\\), \\(h(x) ~ \frac{1}{S} = 1\\), and is thus just a constant; independent of \\(x\\).  Meanwhile, once \\(x \gg S\\), then \\(h(x) ~ 1/x\\). This cancels out the \\(x\\) term in the products describing the death of hare (\\(b y x h(x)\\) ) and growth of the Lynx (\\(c y x h(x)\\)) independent of \\(x\\).  
 
 1.  Introduce the above definition into your simulation, creating both phase portrait and time series plot.  Begin with the following parameter set:
 
