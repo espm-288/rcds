@@ -107,47 +107,13 @@
 
 <p>Though we will focus on simulating our own data with <code>for</code> loops and functions, it is worth a moment to consider the oscillations observed in the real data, which we can access and plot using the now-familiar functions:</p>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr</code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Conflicts with tidy packages -----------------------------------------</code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">## filter(): dplyr, stats
-## lag():    dplyr, stats</code></pre></div>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">data</span> <span class="o">&lt;-</span> <span class="n">read_delim</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/bblais/Systems-Modeling-Spring-2015-Notebooks/master/data/Lynx%20and%20Hare%20Data/lynxhare.csv"</span><span class="p">,</span>
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="n">read_delim</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/bblais/Systems-Modeling-Spring-2015-Notebooks/master/data/Lynx%20and%20Hare%20Data/lynxhare.csv"</span><span class="p">,</span>
                 <span class="s2">";"</span><span class="p">)</span></code></pre></div>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">## Warning: Missing column names filled in: 'X6' [6], 'X7' [7], 'X8' [8],
 ## 'X9' [9], 'X10' [10], 'X11' [11], 'X12' [12], 'X13' [13], 'X14' [14],
 ## 'X15' [15], 'X16' [16], 'X17' [17]</code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Parsed with column specification:
-## cols(
-##   year = col_integer(),
-##   hare = col_integer(),
-##   lynx = col_integer(),
-##   nao = col_double(),
-##   `soi (MONTHLY)` = col_double(),
-##   X6 = col_double(),
-##   X7 = col_double(),
-##   X8 = col_double(),
-##   X9 = col_double(),
-##   X10 = col_double(),
-##   X11 = col_double(),
-##   X12 = col_double(),
-##   X13 = col_double(),
-##   X14 = col_double(),
-##   X15 = col_double(),
-##   X16 = col_double(),
-##   X17 = col_character()
-## )</code></pre></div>
 
 <div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">data</span> <span class="o">%&gt;%</span>
   <span class="n">select</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">hare</span><span class="p">,</span> <span class="n">lynx</span><span class="p">)</span> <span class="o">%&gt;%</span>
@@ -166,17 +132,17 @@
   <li>Define the following mathematical functions in R:</li>
 </ol>
 
-<p>[ f(x,y) = a x - b y x ]</p>
+<p>\[ f(x,y) = a x - b y x \]</p>
 
-<p>[ g(x,y) = c x y - d y ]</p>
+<p>\[ g(x,y) = c x y - d y \]</p>
 
 <ol>
   <li>Write a loop to simulate the following dynamics using the above functions definitions:</li>
 </ol>
 
-<p>[ x_{t+1} = x_t + x_t  f(x,y) ]</p>
+<p>\[ x_{t+1} = x_t + x_t  f(x,y) \]</p>
 
-<p>[ y_{t+1} = y_t + y_t  g(x,y) ]</p>
+<p>\[ y_{t+1} = y_t + y_t  g(x,y) \]</p>
 
 <p>Use the following parameters to get started:</p>
 
@@ -188,7 +154,7 @@ d = .03
 T = 2000
 </code></p>
 
-<p>use initial value (x_0 = 30) and (y_0 = 4) to get started.</p>
+<p>use initial value \(x_0 = 30\) and \(y_0 = 4\) to get started.</p>
 
 <ol>
   <li>
@@ -215,7 +181,7 @@ T = 2000
   <li>re-define the function for hare population, <code>f(x,y)</code>, to reflect limits on growth due to a carrying capacity:</li>
 </ol>
 
-<p>[ f(x,y) = a x (1 - x/K) - b y x ]</p>
+<p>\[ f(x,y) = a x (1 - x/K) - b y x \]</p>
 
 <ol>
   <li>
@@ -231,15 +197,15 @@ T = 2000
 
 <h2 id="exercise-3-limit-cycles">Exercise 3: Limit Cycles</h2>
 
-<p>Another limitation of our model is the ability of the Lynx population to consume hare at arbitrary effiency, regardless of how many hare we have.  Thus a very small initial number of lynx, <code>y</code> can almost immediately become as large as you like as long as there are enough hares. When prey is rare, we might well expect the survival and reproduction of a lynx to be directly proportional to the number of hare, $g(x,y) ~ c x y$, but beyond a certain point we expect additional hare not to matter so much.  Likewise, it may make sense to put an upper limit on how many hare a single lynx can catch.  We model this by introducing a “saturating” function:</p>
+<p>Another limitation of our model is the ability of the Lynx population to consume hare at arbitrary effiency, regardless of how many hare we have.  Thus a very small initial number of lynx, <code>y</code> can almost immediately become as large as you like as long as there are enough hares. When prey is rare, we might well expect the survival and reproduction of a lynx to be directly proportional to the number of hare, \(g(x,y) ~ c x y\), but beyond a certain point we expect additional hare not to matter so much.  Likewise, it may make sense to put an upper limit on how many hare a single lynx can catch.  We model this by introducing a “saturating” function:</p>
 
-<p>$h(x) = \frac{1}{S + x}$ to our equations for (f) and (g):  </p>
+<p>\(h(x) = \frac{1}{S + x}\) to our equations for \(f\) and \(g\):  </p>
 
-<p>[ f(x,y) = a x (1 - x / K)  - b y x h(x) ]</p>
+<p>\[ f(x,y) = a x (1 - x / K)  - b y x h(x) \]</p>
 
-<p>[ g(x,y) = c y x h(x) - d y ]</p>
+<p>\[ g(x,y) = c y x h(x) - d y \]</p>
 
-<p>Note that $h(x)$ is designed to have the following property:  when (x \ll S), (h(x) ~ \frac{1}{S} = 1), and is thus just a constant; independent of (x).  Meanwhile, once (x \gg S), then (h(x) ~ 1/x). This cancels out the $x$ term in the products describing the death of hare ((b y x h(x)) ) and growth of the Lynx ((c y x h(x))) independent of (x).  </p>
+<p>Note that \(h(x)\) is designed to have the following property:  when \(x \ll S\), \(h(x) ~ \frac{1}{S} = 1\), and is thus just a constant; independent of \(x\).  Meanwhile, once \(x \gg S\), then \(h(x) ~ 1/x\). This cancels out the \(x\) term in the products describing the death of hare (\(b y x h(x)\) ) and growth of the Lynx (\(c y x h(x)\)) independent of \(x\).  </p>
 
 <ol>
   <li>Introduce the above definition into your simulation, creating both phase portrait and time series plot.  Begin with the following parameter set:</li>
