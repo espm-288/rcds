@@ -19,7 +19,7 @@ We motivate this using an example of a classic data set that played a fundamenta
 Though we will focus on simulating our own data with `for` loops and functions, it is worth a moment to consider the oscillations observed in the real data, which we can access and plot using the now-familiar functions:
 
 
-```{r message=FALSE}
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 data <- read_delim("https://raw.githubusercontent.com/bblais/Systems-Modeling-Spring-2015-Notebooks/master/data/Lynx%20and%20Hare%20Data/lynxhare.csv",
                 ";") 
