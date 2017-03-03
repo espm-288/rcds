@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>
+    
+      &middot; RCDS
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/rcds/public/css/poole.css">
+  <link rel="stylesheet" href="/rcds/public/css/syntax.css">
+  <link rel="stylesheet" href="/rcds/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/rcds/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/rcds/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!--
+  <script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: {autoNumber: "AMS"} }
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+      displayMath: [ ['$$','$$'], ['\[','\]'] ]
+    }
+  });       
+  </script>
+
+  -->
+</head>
+
+
+  <body class="theme-base-berkeley">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/rcds">
+          RCDS
+        </a>
+      </h1>
+      <p class="lead">Reproducible and Collaborative Data Science</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <!--      <a class="sidebar-nav-item" href="/rcds">Home</a> -->
+
+      
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/index.html">Home</a>
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/policies.html">Course Policies</a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/syllabus.html">Course Syllabus</a>
+        
+      
+
+    </nav>
+    <p>
+      <a href="https://github.com/ds421/rcds"><i class="fa fa-github"></i></a>
+      <a rel="license" property="http://creativecommons.org/ns#license" href="http://creativecommons.org/licenses/by/4.0/" ><img src="/rcds/public/img/cc-by.svg" alt="cc-by"/></a>
+    </p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <hr />
+<p>title: “Lecture notes intro to stochasticity”</p>
+
+<h1 id="stochastic-population-dynamics-models">Stochastic Population Dynamics Models</h1>
+
+<p>Thus far, all the population models &amp; simulations we have explored have been <strong>deterministic</strong>.  We have seen such models can sometimes show surpising and even chaotic behavior, but once we have fixed the model parameters and the initial conditions, we get the exact same pattern every single time.  These choices <em>determine</em> the behavior precisely.</p>
+
+<p>Of course, the real world is not so perfectly predictable.  So far, we have tried to make our models more realistic by adding additional <em>mechanisms</em> such as finite resources, multiple interacting species, and handling times for predators to consume prey.  Today we will go deeper, trying to understand where variation itself comes from, and how it can be modeled. </p>
+
+<p>Our first examples will introduce the case of random enviroments.  Rather than consider fixed parameter values such as the growth rate $r$ or population size $K$, we will think of these numbers as being determined by a coin flip: some years are good and food is plentiful or survival easy, some years are droughts and food is scarce and survival uncertain.</p>
+
+<ul>
+  <li>Where do models come from?</li>
+  <li>Where do (estimates of) parameters of a model come from?</li>
+</ul>
+
+<h2 id="model-topics">Model topics</h2>
+
+<ul>
+  <li>Simple stochastic growth model. </li>
+  <li>Averaging over replicates of stochastic populations &amp; predicting outcomes</li>
+  <li>Paradox in individual vs expected outcomes</li>
+  <li>Stochastic logistic model, environmental noise</li>
+  <li>Bet hedging</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="s2">"tidyverse"</span><span class="p">)</span></code></pre></div>
+
+<h1 id="stochastic-growth">Stochastic growth</h1>
+
+<p>Below is our simplest stochastic growth model, in which our population grows exponentially at a rate \(r(t)\) determined by a coin flip.  </p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">stochastic_growth</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">rep</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="m">15</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+                              <span class="n">good</span> <span class="o">=</span> <span class="m">4</span><span class="p">,</span> <span class="n">bad</span> <span class="o">=</span> <span class="m">1</span><span class="o">/</span><span class="m">5</span><span class="p">,</span> 
+                              <span class="n">weights</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">)){</span>
+
+    <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">numeric</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">x1</span>
+    <span class="n">flips</span> <span class="o">&lt;-</span> <span class="n">sample</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s2">"tails"</span><span class="p">,</span> <span class="s2">"heads"</span><span class="p">),</span> 
+                    <span class="n">size</span> <span class="o">=</span> <span class="n">T</span><span class="p">,</span> 
+                    <span class="n">replace</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> 
+                    <span class="n">prob</span> <span class="o">=</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">t</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="n">T</span><span class="m">-1</span><span class="p">)){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">flips</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"tails"</span><span class="p">){</span>
+            <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="m">+1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">good</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="m">+1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">bad</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">data_frame</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="n">stochastic_growth</span><span class="p">()</span> <span class="o">%&gt;%</span> 
+  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> 
+  <span class="n">geom_line</span><span class="p">()</span></code></pre></div>
+
+<p><img src="/rcds/figure/lectures/stochasticity-lecture/unnamed-chunk-2-1.svg" alt="plot of chunk unnamed-chunk-2" /></p>
+
+<p>Generate 100 replicates of this:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="m">1</span><span class="o">:</span><span class="m">100</span> <span class="o">%&gt;%</span> 
+  <span class="n">map_df</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="n">stochastic_growth</span><span class="p">(),</span> <span class="n">.id</span> <span class="o">=</span> <span class="s2">"rep"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">rep</span><span class="p">))</span> <span class="o">+</span> 
+  <span class="n">geom_line</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span> <span class="o">+</span> 
+  <span class="n">scale_y_log10</span><span class="p">()</span></code></pre></div>
+
+<p><img src="/rcds/figure/lectures/stochasticity-lecture/unnamed-chunk-3-1.svg" alt="plot of chunk unnamed-chunk-3" /></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="m">1</span><span class="o">:</span><span class="m">1000</span> <span class="o">%&gt;%</span> 
+  <span class="n">map_df</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="n">stochastic_growth</span><span class="p">(),</span> <span class="n">.id</span> <span class="o">=</span> <span class="s2">"rep"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">group_by</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">summarise</span><span class="p">(</span><span class="n">ave</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">%&gt;%</span>
+  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">ave</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_line</span><span class="p">()</span> <span class="o">+</span> <span class="n">scale_y_log10</span><span class="p">()</span></code></pre></div>
+
+<p><img src="/rcds/figure/lectures/stochasticity-lecture/unnamed-chunk-4-1.svg" alt="plot of chunk unnamed-chunk-4" /></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">stochastic_growth_K</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">T</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="m">20</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> <span class="n">good</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">bad</span> <span class="o">=</span> <span class="m">.5</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span> <span class="m">0.5</span><span class="p">)){</span>  
+  <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">numeric</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+  <span class="n">x</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">x1</span>
+  <span class="n">flips</span> <span class="o">&lt;-</span> <span class="n">sample</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s2">"tails"</span><span class="p">,</span> <span class="s2">"heads"</span><span class="p">),</span> 
+                  <span class="n">size</span> <span class="o">=</span> <span class="n">T</span><span class="p">,</span>
+                  <span class="n">replace</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> 
+                  <span class="n">prob</span> <span class="o">=</span> <span class="n">weights</span><span class="p">)</span>
+  <span class="k">for</span><span class="p">(</span><span class="n">t</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="n">T</span><span class="m">-1</span><span class="p">)){</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">flips</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"tails"</span><span class="p">){</span>
+          <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="m">+1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="m">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">K</span> <span class="o">*</span> <span class="n">good</span><span class="p">))</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="m">+1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="m">1</span> <span class="o">-</span>  <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">K</span> <span class="o">*</span> <span class="n">bad</span><span class="p">))</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">data_frame</span><span class="p">(</span><span class="n">t</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="m">1</span><span class="o">:</span><span class="m">100</span> <span class="o">%&gt;%</span> 
+  <span class="n">map_df</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="n">stochastic_growth_K</span><span class="p">(),</span> <span class="n">.id</span> <span class="o">=</span> <span class="s2">"rep"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">rep</span><span class="p">))</span> <span class="o">+</span> 
+  <span class="n">geom_line</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="m">0.1</span><span class="p">)</span> <span class="o">+</span> 
+  <span class="n">scale_y_log10</span><span class="p">()</span></code></pre></div>
+
+<p><img src="/rcds/figure/lectures/stochasticity-lecture/unnamed-chunk-6-1.svg" alt="plot of chunk unnamed-chunk-6" /></p>
+
+
+    </div>
+
+  </body>
+</html>
