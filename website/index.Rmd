@@ -15,11 +15,6 @@ nav: true
 
 
 
-## Announcements
-
-- Links for reading assingments have been updated with a bit more information.  Please see the new links for reading for next week.
-
-- Slides for intro lecture are now posted.
   
 ## Course Description
 
