@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <title>
     
-     Readings for week 1 &middot; RCDS
+     Stochasticity exercises &middot; RCDS
     
   </title>
 
@@ -112,21 +112,29 @@
 
 
     <div class="content container">
-      <h2 id="reading">Reading</h2>
+      <p>These exercises provide a continuation from the <a href="/assignments/popdyn-assignment">multi-species population dynamics exercises</a></p>
 
-<p>For our first class, please read Sections <a href="http://r4ds.had.co.nz/introduction.html">1.1 - 1.8 in R4DS</a> </p>
+<h2 id="exercise-1-environmental-noise">Exercise 1: Environmental noise</h2>
 
-<ul>
-  <li>For background on Greater Data Science, read <a href="https://dl.dropboxusercontent.com/u/23421017/50YearsDataScience.pdf">Donoho 2016</a></li>
-  <li>For troubleshooting issues with git and R, see <a href="https://happygitwithr.com">Happy Git with R</a></li>
-</ul>
+<ol>
+  <li>Run multiple replicates of the simulation with logistic growth <a href="/lectures/stochasticity-lecture">shown in class</a> (leaving the parameters fixed) and plot the results.</li>
+  <li>Repeat the averaging process we showed above for the exponential growth model.  What happens?  Do the results match the deterministic case?  </li>
+</ol>
 
-<h2 id="tasks">Tasks</h2>
+<h2 id="exercise-2-bet-hedging">Exercise 2: Bet-hedging</h2>
 
-<ul>
-  <li>Fill out this <a href="https://docs.google.com/a/berkeley.edu/forms/d/e/1FAIpQLScGfha3l_l8sBRgOILbEflGlChOOqvg44sXOa5ZVgsbRPMpIg/viewform">short form</a> so we can create your private GitHub repository for the course</li>
-  <li>Install Git, RStudio, and the <code>tidyverse</code> package.  </li>
-</ul>
+<p>Can two losing strategies make for a winning strategy?  Modify the exponential growth simulation to include a population in which a fraction <code>p</code> execute strategy A (seeds germinate and reproduce or die depending on weather conditions)  and a fraction <code>1-p</code> take strategy B and remain in the ground (seed bank), where they cannot reproduce but experience only a small probability of mortality.  Each year compute the updated population in the seed bank as the sum of of the contribution from strategy A and B, re-assign all new seeds to a strategy, and continue. </p>
+
+<p>Strategy A: Germinate with probability <code>p</code>
+  - Heads: Good year! Each individual contributes 4 new seeds to the seed bank.<br />
+  - Tails: Bad year! Only 1/5th of the population survives to contribute a seed back to the seed bank. </p>
+
+<p>Strategy B: Remain in seed bank (probability <code>(1-p)</code>), no offspring.  5% die each year</p>
+
+<ol>
+  <li>Explore how the long-term outcome (<em>not</em> the average outcome) depends on the value of <code>p</code>.  Does the population look like it will persist? </li>
+  <li>Vary the fraction of individuals allocated to Stategy B (the ‘seed bank’) vs that allocated to Strategy A by trying different values of <code>p</code>.  What do you observe?  Can this combination of losing stragies be successful?  How?  Can you determine the optimal stategy?  </li>
+</ol>
 
 
     </div>
