@@ -134,7 +134,7 @@ S = 50
 
 # Stochasticity exercise 
 
-(Exercise to follow in week 2 of popdyn unit)
+[Exercise to follow in week 2 of popdyn unit here](/assignments/stochasticity-exercises)
 
 
 

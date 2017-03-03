@@ -1,0 +1,120 @@
+---
+title: "Lecture notes intro to stochasticity"
+
+
+# Stochastic Population Dynamics Models
+
+Thus far, all the population models & simulations we have explored have been **deterministic**.  We have seen such models can sometimes show surpising and even chaotic behavior, but once we have fixed the model parameters and the initial conditions, we get the exact same pattern every single time.  These choices _determine_ the behavior precisely.
+
+Of course, the real world is not so perfectly predictable.  So far, we have tried to make our models more realistic by adding additional _mechanisms_ such as finite resources, multiple interacting species, and handling times for predators to consume prey.  Today we will go deeper, trying to understand where variation itself comes from, and how it can be modeled. 
+
+Our first examples will introduce the case of random enviroments.  Rather than consider fixed parameter values such as the growth rate $r$ or population size $K$, we will think of these numbers as being determined by a coin flip: some years are good and food is plentiful or survival easy, some years are droughts and food is scarce and survival uncertain.
+
+
+- Where do models come from?
+- Where do (estimates of) parameters of a model come from?
+
+
+
+## Model topics
+
+- Simple stochastic growth model. 
+- Averaging over replicates of stochastic populations & predicting outcomes
+- Paradox in individual vs expected outcomes
+- Stochastic logistic model, environmental noise
+- Bet hedging
+
+
+```{r message=FALSE}
+library("tidyverse")
+```
+
+
+# Stochastic growth
+
+Below is our simplest stochastic growth model, in which our population grows exponentially at a rate \\(r(t)\\) determined by a coin flip.  
+
+```{r}
+stochastic_growth <- function(rep = 1, T = 15, x1 = 1,
+                              good = 4, bad = 1/5, 
+                              weights = c(1,1)){
+
+
+    x <- numeric(T)
+    x[1] <- x1
+    flips <- sample(c("tails", "heads"), 
+                    size = T, 
+                    replace = TRUE, 
+                    prob = weights)
+    for(t in 1:(T-1)){
+        if(flips[t] == "tails"){
+            x[t+1] <- x[t] * good
+        } else {
+            x[t+1] <- x[t] * bad
+        }
+    }
+    data_frame(t = 1:T, x = x)
+}
+
+
+stochastic_growth() %>% 
+  ggplot(aes(t,x)) + 
+  geom_line()
+```
+
+Generate 100 replicates of this:
+```{r}
+
+1:100 %>% 
+  map_df(function(i) stochastic_growth(), .id = "rep") %>%
+  ggplot(aes(t,x, group=rep)) + 
+  geom_line(alpha=0.1) + 
+  scale_y_log10()
+```
+
+
+```{r}
+
+1:1000 %>% 
+  map_df(function(i) stochastic_growth(), .id = "rep") %>%
+  group_by(t) %>%
+  summarise(ave = mean(x)) %>%
+  ggplot(aes(t,ave)) + geom_line() + scale_y_log10()
+```
+
+
+
+
+
+```{r}
+
+
+stochastic_growth_K <- function(T = 100, x1 = 20, r = 0.1, good = 2, bad = .5, K = 100, weights = c(0.5, 0.5)){  
+  x <- numeric(T)
+  x[1] <- x1
+  flips <- sample(c("tails", "heads"), 
+                  size = T,
+                  replace = TRUE, 
+                  prob = weights)
+  for(t in 1:(T-1)){
+      if(flips[t] == "tails"){
+          x[t+1] <- r * x[t] * (1 - x[t] / (K * good)) + x[t]
+      } else {
+        x[t+1] <- r * x[t] * (1 -  x[t] / (K * bad)) + x[t]
+      }
+  }
+  data_frame(t = 1:T, x = x)
+}
+
+ 
+```
+
+
+```{r}
+1:100 %>% 
+  map_df(function(i) stochastic_growth_K(), .id = "rep") %>%
+  ggplot(aes(t,x, group=rep)) + 
+  geom_line(alpha=0.1) + 
+  scale_y_log10()
+```
+
