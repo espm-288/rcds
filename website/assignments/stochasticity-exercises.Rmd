@@ -2,11 +2,11 @@
 title: "Stochasticity exercises"
 ---
 
-These exercises provide a continuation from the [multi-species population dynamics exercises](/assignments/popdyn-assignment)
+These exercises provide a continuation from the [multi-species population dynamics exercises](/rcds/assignments/popdyn-assignment)
 
 ## Exercise 1: Environmental noise
 
-1. Run multiple replicates of the simulation with logistic growth [shown in class](/lectures/stochasticity-lecture) (leaving the parameters fixed) and plot the results.
+1. Run multiple replicates of the simulation with logistic growth [shown in class](/rcds/lectures/stochasticity-lecture) (leaving the parameters fixed) and plot the results.
 1. Repeat the averaging process we showed above for the exponential growth model.  What happens?  Do the results match the deterministic case?  
 
 ## Exercise 2: Bet-hedging
