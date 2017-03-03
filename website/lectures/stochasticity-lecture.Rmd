@@ -1,6 +1,6 @@
 ---
 title: "Lecture notes intro to stochasticity"
-
+---
 
 # Stochastic Population Dynamics Models
 
