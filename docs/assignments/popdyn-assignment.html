@@ -8,10 +8,9 @@
 
   <!-- Enable responsiveness on mobile devices-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
   <title>
     
-      Population Dynamics Assignment &middot; RCDS
+     Population Dynamics Assignment &middot; RCDS
     
   </title>
 
@@ -29,9 +28,19 @@
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
   
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });       </script>
 
-  
+  <!--
+  <script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: {autoNumber: "AMS"} }
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+      displayMath: [ ['$$','$$'], ['\[','\]'] ]
+    }
+  });       
+  </script>
+
+  -->
 </head>
 
 
@@ -109,20 +118,13 @@
 
 <div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">&lt;-</span> <span class="n">read_delim</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/bblais/Systems-Modeling-Spring-2015-Notebooks/master/data/Lynx%20and%20Hare%20Data/lynxhare.csv"</span><span class="p">,</span>
-                <span class="s2">";"</span><span class="p">)</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Warning: Missing column names filled in: 'X6' [6], 'X7' [7], 'X8' [8],
-## 'X9' [9], 'X10' [10], 'X11' [11], 'X12' [12], 'X13' [13], 'X14' [14],
-## 'X15' [15], 'X16' [16], 'X17' [17]</code></pre></div>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">data</span> <span class="o">%&gt;%</span>
+                <span class="s2">";"</span><span class="p">)</span> 
+<span class="n">data</span> <span class="o">%&gt;%</span>
   <span class="n">select</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">hare</span><span class="p">,</span> <span class="n">lynx</span><span class="p">)</span> <span class="o">%&gt;%</span>
   <span class="n">mutate</span><span class="p">(</span><span class="n">hare</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">hare</span><span class="p">),</span> <span class="n">lynx</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">lynx</span><span class="p">))</span> <span class="o">%&gt;%</span>
   <span class="n">gather</span><span class="p">(</span><span class="n">species</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="o">-</span><span class="n">year</span><span class="p">)</span> <span class="o">%&gt;%</span>
   <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">population</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">species</span><span class="p">))</span> <span class="o">+</span> 
   <span class="n">geom_line</span><span class="p">()</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">## Warning: Removed 145 rows containing missing values (geom_path).</code></pre></div>
 
 <p><img src="/rcds/figure/assignments/popdyn-assignment/unnamed-chunk-1-1.svg" alt="plot of chunk unnamed-chunk-1" /></p>
 
