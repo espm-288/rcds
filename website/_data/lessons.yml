@@ -30,6 +30,8 @@
   date: "03-10"
   topics: "R packages, reproduce ex"          
 - title: "Fisheries Collapse 1"
+  lecture: "fish-1"
+  assignment: "fish-assignment"
   topics: "Relational databases"
   date: "03-17"
 - title: "Fisheries Collapse 2"
