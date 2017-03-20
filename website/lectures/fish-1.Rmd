@@ -11,10 +11,9 @@ output:
 
 ---
 
-```{r include=FALSE}
-knitr::opts_chunk$set(eval=FALSE)
+```{r}
+knitr::opts_chunk$set(message=FALSE, warning = FALSE)
 ```
-
 
 # Unit III: Global Fisheries Collapse?
 
@@ -171,14 +170,25 @@ df
     
 ```
 
-Join the `values`, `assessment`, `stock`, `units`, and `area` tables together.  For each join, it is necessary to identify the `key` shared by both tables on which the join will take place.  Also be careful to join tables in the correct order such that no data from the desired columns is lost.  (You should have 16,308 rows at the end, the same number that `values` table started with).
 
+## Step 2: Dealing with missing values
+
+
+```{r eval=FALSE}
+df %>% 
+  group_by(commonname, year) %>%
+  summarise(catch = sum(TC)) %>% 
+  filter(commonname == "Atlantic cod") %>%
+  ggplot(aes(year, catch)) + 
+  geom_line()
+
+```
 
 
 ## Step 2: Dealing with missing values
 
 
-```{r}
+```{r echo = FALSE}
 df %>% 
   group_by(commonname, year) %>%
   summarise(catch = sum(TC)) %>% 
@@ -198,7 +208,10 @@ Different stock assessments will cover different regions and times for the same 
 
 Use `groups` to sum over the `TC` and `ssb` data for each year for each species, then select the "Atlantic cod" and plot their `TC` over time.  
 
-```{r}
+
+## Step 3: Aggregating over assessments
+
+```{r eval=FALSE}
 df %>% 
   group_by(commonname, year) %>%
   summarise(catch = sum(TC, na.rm=TRUE)) %>% 
@@ -207,6 +220,20 @@ df %>%
   geom_line()
 
 ```
+
+
+## Step 3: Aggregating over assessments
+
+```{r echo=FALSE}
+df %>% 
+  group_by(commonname, year) %>%
+  summarise(catch = sum(TC, na.rm=TRUE)) %>% 
+  filter(commonname == "Atlantic cod") %>%
+  ggplot(aes(year, catch)) + 
+  geom_line()
+
+```
+
 
 ## Matching the MEA plot
 
@@ -217,7 +244,9 @@ The Millenium Ecosystem Assessment does not spell out their data sources, but it
 
 Let's try just looking at all stock assessessments from Canadian waters instead.  Modify the plot to show just those cod caught by Canada. We'll need to group by an extra variable now as well.  
 
-```{r}
+## Matching the MEA plot
+
+```{r eval=FALSE}
 df %>% 
   group_by(commonname, country, year) %>%
   summarise(catch = sum(TC, na.rm=TRUE)) %>% 
@@ -227,11 +256,25 @@ df %>%
 ```
 
 
+## Matching the MEA plot
+
+```{r echo = FALSE}
+df %>% 
+  group_by(commonname, country, year) %>%
+  summarise(catch = sum(TC, na.rm=TRUE)) %>% 
+  filter(commonname == "Atlantic cod", country == "Canada") %>%
+  ggplot(aes(year, catch)) + 
+  geom_line()
+```
+
+
+
+
 ## Accounting for units
 
-Not perfect, but much better.  What about those pesky units?  Determine whether all `catch_landings` in your plot are using the same units: e.g. MT or (Metric Tonnes), vs E03 (thousands of fish).
+Not perfect, but much better.  What about those pesky units?  Determine whether all `CT` in your plot are using the same units: e.g. MT or (Metric Tonnes), vs E03 (thousands of fish).
 
-```{r}
+```{r eval=FALSE}
 df %>% filter(TC_units == "MT") %>%
   group_by(commonname, country, year) %>%
   summarise(catch = sum(TC, na.rm=TRUE)) %>% 
@@ -240,65 +283,27 @@ df %>% filter(TC_units == "MT") %>%
   geom_line()
 ```
 
+
+
+
+## Accounting for units
+
+
+```{r echo=FALSE}
+df %>% filter(TC_units == "MT") %>%
+  group_by(commonname, country, year) %>%
+  summarise(catch = sum(TC, na.rm=TRUE)) %>% 
+  filter(commonname == "Atlantic cod", country == "Canada") %>%
+  ggplot(aes(year, catch)) + 
+  geom_line()
+```
+
+
+
+## Accounting for units
+
+
+
 Excellent! All the same units so no need to start worrying about the average weight of a cod fish.  Our result is not a perfect match to the MEA, but pretty close.  On to part II to evaluate global collapse trends.
 
 
-## Stock Collapses
-
-Following Worm et al (2006), write a function of `current_stock` and `max_stock` that will deterime if the current stock is less than 10% of the max stock observed.
-
-
-
-```{r}
-```
-
-Define a new table that computes the total `ssb` and `catch_landings` for each year for each species. Select only the columns we need: `"scientificname", "tsyear", "ssb_sum", "catch_landings_sum"`.  
-
-
-- Add a new column to the table that contains for each species the maximum value of `catch_landings` over all years.
-
-- Now use  `mutate` and this new column to compute whether or not each year should be marked as "collapsed" or not.  Add this information as another column in your table.  
-
-
-- Now compute a new table representing the fraction of taxa that are in the 'collapsed' state for each year in the data set.  
-- Weight your results by the total number of taxa in the data, 
-- and plot this fraction over time
-
-
-```{r}
-
-```
-
-
-
-## Part III: Aggregate trends in Biomass vs catch
-
-
-Plot the data that aggregates the total spawning stock biomass (ssb) across all species over time between 1950 and 2006.  
-
-To avoid incomparable units, select only data from whichever unit (`MT` or `E03`) represents the larger fraction, or create separate plots for the two different measurement units.
-
-
-```{r}
-
-
-```
-
-
-
-Does this mean stocks are increasing, or that we are just assessing and exploiting more new stocks, even as old stocks decline?  Plot the total number of taxa assessed in each year of the data to compare.
-
-
-```{r}
-## Look, the number of taxa covered is increasing, adding new fish populations to the mix even as others decline
-
-```
-
-To avoid this confounding variable, identify a core group of species that all have data for every year between 1950 and 2006.  
-
-
-```{r}
-# Identify a core group of taxa assessed every year from 1950 to 2006.  May be tricky!
-## Plot ssb and catch_landings between 1950 and 2006
-
-```

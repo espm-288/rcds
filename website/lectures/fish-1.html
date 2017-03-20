@@ -64,6 +64,10 @@
 
     
   
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::opts_chunk$<span class="kw">set</span>(<span class="dt">message=</span><span class="ot">FALSE</span>, <span class="dt">warning =</span> <span class="ot">FALSE</span>)</code></pre></div>
+</section>
 <section id="unit-iii-global-fisheries-collapse" class="titleslide slide level1"><h2 class="shout">Unit III: Global Fisheries Collapse?</h2></section><section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <ul>
@@ -123,6 +127,15 @@ ram &lt;-<span class="st"> </span><span class="kw">lapply</span>(sheets, readxl:
 
 ## Name the available tables:
 <span class="kw">names</span>(ram)</code></pre></div>
+<pre><code>##  [1] &quot;area&quot;                    &quot;assessment&quot;             
+##  [3] &quot;assessmethod&quot;            &quot;assessor&quot;               
+##  [5] &quot;biometrics&quot;              &quot;bioparams&quot;              
+##  [7] &quot;bioparams_ids_views&quot;     &quot;bioparams_units_views&quot;  
+##  [9] &quot;bioparams_values_views&quot;  &quot;management&quot;             
+## [11] &quot;stock&quot;                   &quot;taxonomy&quot;               
+## [13] &quot;timeseries&quot;              &quot;timeseries_ids_views&quot;   
+## [15] &quot;timeseries_units_views&quot;  &quot;timeseries_values_views&quot;
+## [17] &quot;tsmetrics&quot;</code></pre>
 </section><section id="exploring-the-database-a-birds-eye-view" class="slide level2">
 <h2>Exploring the Database: a bird’s eye view</h2>
 <ul>
@@ -156,7 +169,6 @@ ram &lt;-<span class="st"> </span><span class="kw">lapply</span>(sheets, readxl:
 <span class="st">      </span><span class="kw">rename</span>(<span class="dt">TC_units =</span> TC, <span class="dt">SSB_units =</span> SSB)) %&gt;%<span class="st"> </span>
 <span class="st">   </span><span class="kw">select</span>(scientificname, commonname, country, year, SSB, TC, SSB_units, TC_units) -&gt;<span class="st"> </span>
 df</code></pre></div>
-<p>Join the <code>values</code>, <code>assessment</code>, <code>stock</code>, <code>units</code>, and <code>area</code> tables together. For each join, it is necessary to identify the <code>key</code> shared by both tables on which the join will take place. Also be careful to join tables in the correct order such that no data from the desired columns is lost. (You should have 16,308 rows at the end, the same number that <code>values</code> table started with).</p>
 </section><section id="step-2-dealing-with-missing-values" class="slide level2">
 <h2>Step 2: Dealing with missing values</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df %&gt;%<span class="st"> </span>
@@ -165,58 +177,55 @@ df</code></pre></div>
 <span class="st">  </span><span class="kw">filter</span>(commonname ==<span class="st"> &quot;Atlantic cod&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, catch)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+</section><section id="step-2-dealing-with-missing-values-1" class="slide level2">
+<h2>Step 2: Dealing with missing values</h2>
+<p><img src="fish-1_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" /></p>
 </section><section id="step-3-aggregating-over-assessments" class="slide level2">
 <h2>Step 3: Aggregating over assessments</h2>
 <p>Different stock assessments will cover different regions and times for the same species. To get the full picture of what is happening to any given species, we must sum up the stocks over all of these assessments in a given year.</p>
 <p>Use <code>groups</code> to sum over the <code>TC</code> and <code>ssb</code> data for each year for each species, then select the “Atlantic cod” and plot their <code>TC</code> over time.</p>
+</section><section id="step-3-aggregating-over-assessments-1" class="slide level2">
+<h2>Step 3: Aggregating over assessments</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(commonname, year) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">catch =</span> <span class="kw">sum</span>(TC, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(commonname ==<span class="st"> &quot;Atlantic cod&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, catch)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+</section><section id="step-3-aggregating-over-assessments-2" class="slide level2">
+<h2>Step 3: Aggregating over assessments</h2>
+<p><img src="fish-1_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
 </section><section id="matching-the-mea-plot" class="slide level2">
 <h2>Matching the MEA plot</h2>
 <p>Not quite right! This doesn’t seem to quite match the pattern shown by Millennium Ecosystem Assessment plot. The early years look good, but the total landings here are much larger. Is this a real discrepancy in the data or have we forgotten something?</p>
 <p>The Millenium Ecosystem Assessment does not spell out their data sources, but it does have one hint: their figure just shows fishing off the banks of Newfoundland. We can see where else Atlantic cod can be found by joining the <code>areas</code> table and <code>stockid</code> table:</p>
 <p>Let’s try just looking at all stock assessessments from Canadian waters instead. Modify the plot to show just those cod caught by Canada. We’ll need to group by an extra variable now as well.</p>
+</section><section id="matching-the-mea-plot-1" class="slide level2">
+<h2>Matching the MEA plot</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(commonname, country, year) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">catch =</span> <span class="kw">sum</span>(TC, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(commonname ==<span class="st"> &quot;Atlantic cod&quot;</span>, country ==<span class="st"> &quot;Canada&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, catch)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+</section><section id="matching-the-mea-plot-2" class="slide level2">
+<h2>Matching the MEA plot</h2>
+<p><img src="fish-1_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" /></p>
 </section><section id="accounting-for-units" class="slide level2">
 <h2>Accounting for units</h2>
-<p>Not perfect, but much better. What about those pesky units? Determine whether all <code>catch_landings</code> in your plot are using the same units: e.g. MT or (Metric Tonnes), vs E03 (thousands of fish).</p>
+<p>Not perfect, but much better. What about those pesky units? Determine whether all <code>CT</code> in your plot are using the same units: e.g. MT or (Metric Tonnes), vs E03 (thousands of fish).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df %&gt;%<span class="st"> </span><span class="kw">filter</span>(TC_units ==<span class="st"> &quot;MT&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(commonname, country, year) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">catch =</span> <span class="kw">sum</span>(TC, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(commonname ==<span class="st"> &quot;Atlantic cod&quot;</span>, country ==<span class="st"> &quot;Canada&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, catch)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+</section><section id="accounting-for-units-1" class="slide level2">
+<h2>Accounting for units</h2>
+<p><img src="fish-1_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" /></p>
+</section><section id="accounting-for-units-2" class="slide level2">
+<h2>Accounting for units</h2>
 <p>Excellent! All the same units so no need to start worrying about the average weight of a cod fish. Our result is not a perfect match to the MEA, but pretty close. On to part II to evaluate global collapse trends.</p>
-</section><section id="stock-collapses" class="slide level2">
-<h2>Stock Collapses</h2>
-<p>Following Worm et al (2006), write a function of <code>current_stock</code> and <code>max_stock</code> that will deterime if the current stock is less than 10% of the max stock observed.</p>
-<p>Define a new table that computes the total <code>ssb</code> and <code>catch_landings</code> for each year for each species. Select only the columns we need: <code>&quot;scientificname&quot;, &quot;tsyear&quot;, &quot;ssb_sum&quot;, &quot;catch_landings_sum&quot;</code>.</p>
-<ul>
-<li><p>Add a new column to the table that contains for each species the maximum value of <code>catch_landings</code> over all years.</p></li>
-<li><p>Now use <code>mutate</code> and this new column to compute whether or not each year should be marked as “collapsed” or not. Add this information as another column in your table.</p></li>
-<li>Now compute a new table representing the fraction of taxa that are in the ‘collapsed’ state for each year in the data set.<br />
-</li>
-<li>Weight your results by the total number of taxa in the data,</li>
-<li><p>and plot this fraction over time</p></li>
-</ul>
-</section><section id="part-iii-aggregate-trends-in-biomass-vs-catch" class="slide level2">
-<h2>Part III: Aggregate trends in Biomass vs catch</h2>
-<p>Plot the data that aggregates the total spawning stock biomass (ssb) across all species over time between 1950 and 2006.</p>
-<p>To avoid incomparable units, select only data from whichever unit (<code>MT</code> or <code>E03</code>) represents the larger fraction, or create separate plots for the two different measurement units.</p>
-<p>Does this mean stocks are increasing, or that we are just assessing and exploiting more new stocks, even as old stocks decline? Plot the total number of taxa assessed in each year of the data to compare.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Look, the number of taxa covered is increasing, adding new fish populations to the mix even as others decline</code></pre></div>
-<p>To avoid this confounding variable, identify a core group of species that all have data for every year between 1950 and 2006.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Identify a core group of taxa assessed every year from 1950 to 2006.  May be tricky!</span>
-## Plot ssb and catch_landings between 1950 and 2006</code></pre></div>
 </section>
 
   <!--
