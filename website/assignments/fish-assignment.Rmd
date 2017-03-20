@@ -3,294 +3,37 @@ title: "Fisheries Collapse"
 
 ---
 
-```{r include=FALSE}
-knitr::opts_chunk$set(eval=FALSE)
-```
-
-
-# Unit III: Global Fisheries Collapse?
-
-
-## Introduction
-
-- [Atlantic Cod History](https://www.youtube.com/watch?v=3fCX6XKzbUY)
-- ["End of the Line" Trailer](https://www.youtube.com/watch?v=H6WOvY_C-_I)
-
-
-
-## Atlantic Cod History
-
-
-<iframe
-width="560"
-height="315"
-src="https://www.youtube.com/embed/3fCX6XKzbUY"
-frameborder="0"
-allowfullscreen
-></iframe>
-
-
-
-
-## End of the Line
-
-
-<iframe
-width="560"
-height="315"
-src="https://www.youtube.com/embed/H6WOvY_C-_I"
-frameborder="0"
-allowfullscreen
-></iframe>
-
-
-## Cod Collapse
-
-<img src="http://berkeley.carlboettiger.info/espm-88b/fish/img/codcollapse.jpg" width=600>
-
-Source: http://www.millenniumassessment.org/documents/document.356.aspx.pdf
-
-
-## Global fisheries trends
-
-<img src="http://berkeley.carlboettiger.info/espm-88b/img/worm2006.png" width=700 height = 500>
-
-### Source: [Worm et al. 2006 _Science_](http://doi.org/10.1126/science.1132294)
-
-
-## Media version
-
-- [New York Times: "Study Sees 'Global Collapse' of Fish Species"](http://www.nytimes.com/2006/11/03/science/03fish.html?_r=0)
-- [BBC declares: 'Only 50 years left' for sea fish](http://news.bbc.co.uk/2/hi/science/nature/6108414.stm) 
-
-![](http://graphics8.nytimes.com/images/2006/11/02/us/1103-nat-webFISH.gif)
-
-
-
-
-
-
-
-## The Database
-
-[RAM Legacy Stock Assessment Database](http://ramlegacy.marinebiodiversity.ca/ram-legacy-stock-assessment-database)
-
-<img src="http://ramlegacy.marinebiodiversity.ca/ram-legacy-stock-assessment-database/ram-legacy-entity-relationship-diagram" width=700>
-
-```{r}
-library("tidyverse")
-library("readxl")
-```
-
-## Reading in the tables
-
-<!-- 
-
-```{r}
-values <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/values.csv")
-assessment <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/assessment.csv")
-stock <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/stock.csv")
-units <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/units.csv")
-area  <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/area.csv")
-```
-
-
--->
-
-
-
-
-```{r, message=FALSE, warning=FALSE}
-download.file("https://depts.washington.edu/ramlegac/wordpress/databaseVersions/RLSADB_v3.0_(assessment_data_only)_excel.zip", 
-              "ramlegacy.zip")
-path <- unzip("ramlegacy.zip")
-sheets <- readxl::excel_sheets(path)
-ram <- lapply(sheets, readxl::read_excel, path = path)
-names(ram) <- sheets
-
-## Name the available tables:
-names(ram)
-```
-
-
-
-
-## Exploring the Database: a bird's eye view
-
-- "Tidy Data": Codd's Third Normal form:
-
-> Each row must describe the Key, the Whole Key, and Nothing But the Key (so help me Cobb)
-
-
-
-## What is a Stock Assessment?
-
-- From the Assessment Table, id: http://www.afsc.noaa.gov/REFM/docs/2010/GOApop.pdf
-- From said pdf, methods (in 2009 assessment): http://www.afsc.noaa.gov/refm/docs/2009/GOApop.pdf
-
-
-
-
-> When treated this way, our stock assessment is a large Bayesian model, which includes
-informative (e.g., lognormal natural mortality with a small CV) and noninformative (or nearly so, such as
-a parameter bounded between 0 and 10) prior distributions. In the model presented in this SAFE report,
-the number of parameters estimated is 134.
-
--- http://www.afsc.noaa.gov/refm/docs/2009/GOApop.pdf pg 757
-
-
-## Task 1: Investigating Cod Collapse
-
-<img src="http://berkeley.carlboettiger.info/espm-88b/fish/img/codcollapse.jpg" width=600>
-
-
-## Step 1: Joining up the data
-
-
-
-We want a table with the following additional columns: `"country"`, `"ssb_unit"`, `"catch_landings_unit"`, `"scientificname"`, `"commonname"`, `"year"`, `"ssb"`, and `"TC"` columns.  
-
-```{r}
-ram$timeseries_values_views %>%
-  select(assessid, stockid, year, SSB, TC) %>%
-  left_join(ram$stock) %>%
-  left_join(ram$area) %>% 
-   select(assessid, stockid, scientificname, commonname, country, year, SSB, TC) %>%
-  left_join(ram$timeseries_units_views %>% 
-      rename(TC_units = TC, SSB_units = SSB)) %>% 
-   select(scientificname, commonname, country, year, SSB, TC, SSB_units, TC_units) -> 
-df
-    
-```
-
-Join the `values`, `assessment`, `stock`, `units`, and `area` tables together.  For each join, it is necessary to identify the `key` shared by both tables on which the join will take place.  Also be careful to join tables in the correct order such that no data from the desired columns is lost.  (You should have 16,308 rows at the end, the same number that `values` table started with).
-
-
-
-## Step 2: Dealing with missing values
-
-
-```{r}
-df %>% 
-  group_by(commonname, year) %>%
-  summarise(catch = sum(TC)) %>% 
-  filter(commonname == "Atlantic cod") %>%
-  ggplot(aes(year, catch)) + 
-  geom_line()
-
-```
-
-
-
-
-## Step 3: Aggregating over assessments
-
-
-Different stock assessments will cover different regions and times for the same species.  To get the full picture of what is happening to any given species, we must sum up the stocks over all of these assessments in a given year.  
-
-Use `groups` to sum over the `TC` and `ssb` data for each year for each species, then select the "Atlantic cod" and plot their `TC` over time.  
-
-```{r}
-df %>% 
-  group_by(commonname, year) %>%
-  summarise(catch = sum(TC, na.rm=TRUE)) %>% 
-  filter(commonname == "Atlantic cod") %>%
-  ggplot(aes(year, catch)) + 
-  geom_line()
-
-```
-
-## Matching the MEA plot
-
-Not quite right!  This doesn't seem to quite match the pattern shown by Millennium Ecosystem Assessment plot.  The early years look good, but the total landings here are much larger.  Is this a real discrepancy in the data or have we forgotten something?
-
-The Millenium Ecosystem Assessment does not spell out their data sources, but it does have one hint: their figure just shows fishing off the banks of Newfoundland.  We can see where else Atlantic cod can be found by joining the `areas` table and `stockid` table:   
-
-
-Let's try just looking at all stock assessessments from Canadian waters instead.  Modify the plot to show just those cod caught by Canada. We'll need to group by an extra variable now as well.  
-
-```{r}
-df %>% 
-  group_by(commonname, country, year) %>%
-  summarise(catch = sum(TC, na.rm=TRUE)) %>% 
-  filter(commonname == "Atlantic cod", country == "Canada") %>%
-  ggplot(aes(year, catch)) + 
-  geom_line()
-```
-
-
-## Accounting for units
-
-Not perfect, but much better.  What about those pesky units?  Determine whether all `catch_landings` in your plot are using the same units: e.g. MT or (Metric Tonnes), vs E03 (thousands of fish).
-
-```{r}
-df %>% filter(TC_units == "MT") %>%
-  group_by(commonname, country, year) %>%
-  summarise(catch = sum(TC, na.rm=TRUE)) %>% 
-  filter(commonname == "Atlantic cod", country == "Canada") %>%
-  ggplot(aes(year, catch)) + 
-  geom_line()
-```
-
-Excellent! All the same units so no need to start worrying about the average weight of a cod fish.  Our result is not a perfect match to the MEA, but pretty close.  On to part II to evaluate global collapse trends.
-
-
 ## Stock Collapses
 
-Following Worm et al (2006), write a function of `current_stock` and `max_stock` that will deterime if the current stock is less than 10% of the max stock observed.
+Following Worm et al (2006), write a function of `current_stock` and `max_stock` that will determine if the current stock is less than 10% of the max stock observed.
+
+Define a new table that computes the total `ssb` and `TC` for each year for each species. Select only the columns we need: `"scientificname", "tsyear", "ssb_sum", "TC_sum"`.  
+
+
+1. Add a new column to the table that contains for each species the maximum value of `TC` over all years.
+1. Now use  `mutate` and this new column to compute whether or not each year should be marked as "collapsed" or not.  Add this information as another column in your table.  
+1. Now compute a new table representing the fraction of taxa that are in the 'collapsed' state for each year in the data set.  
+1. Weight your results by the total number of taxa in the data, 
+1. and plot this fraction over time
+
+
+## Aggregate trends in Biomass vs catch
+
+Thus far our results are heavily influenced by the number of taxa for which data is available at any given year.  To get a better match to the Worm et al results, we will narrow down the data further:
+
+1. Plot the data that aggregates the total spawning stock biomass (ssb) across all species over time between 1950 and 2006.
+1. To avoid incomparable units, select only data from whichever unit (`MT` or `E03`) represents the larger fraction, or create separate plots for the two different measurement units.
+1. Does this mean stocks are increasing, or that we are just assessing and exploiting more new stocks, even as old stocks decline?  Plot the total number of taxa assessed in each year of the data to compare.
+1. To avoid this confounding variable, identify a core group of species that all have data for every year between 1950 and 2006. For this group, compute the fraction of the group that (a) are currently collapsed or (b) have ever experienced a collapse (cumulative collapse rate), as in the figure from Worm 2006. 
+
+![](http://berkeley.carlboettiger.info/espm-88b/img/worm2006.png)
+
+
+## Understanding Sensitivity
+
+How do your results differ between `ssb` (estimated spawning stock biomass) and `TC` (total catch)?
+
+Repeat this analysis with varying definitions of "collapsed" (e.g. a definition based on a deviation from mean instead of max stock, a different percentage, etc).  Can you construct a definition that is less sensitive to chance fluctuations?
 
 
 
-```{r}
-```
-
-Define a new table that computes the total `ssb` and `catch_landings` for each year for each species. Select only the columns we need: `"scientificname", "tsyear", "ssb_sum", "catch_landings_sum"`.  
-
-
-- Add a new column to the table that contains for each species the maximum value of `catch_landings` over all years.
-
-- Now use  `mutate` and this new column to compute whether or not each year should be marked as "collapsed" or not.  Add this information as another column in your table.  
-
-
-- Now compute a new table representing the fraction of taxa that are in the 'collapsed' state for each year in the data set.  
-- Weight your results by the total number of taxa in the data, 
-- and plot this fraction over time
-
-
-```{r}
-
-```
-
-
-
-## Part III: Aggregate trends in Biomass vs catch
-
-
-Plot the data that aggregates the total spawning stock biomass (ssb) across all species over time between 1950 and 2006.  
-
-To avoid incomparable units, select only data from whichever unit (`MT` or `E03`) represents the larger fraction, or create separate plots for the two different measurement units.
-
-
-```{r}
-
-
-```
-
-
-
-Does this mean stocks are increasing, or that we are just assessing and exploiting more new stocks, even as old stocks decline?  Plot the total number of taxa assessed in each year of the data to compare.
-
-
-```{r}
-## Look, the number of taxa covered is increasing, adding new fish populations to the mix even as others decline
-
-```
-
-To avoid this confounding variable, identify a core group of species that all have data for every year between 1950 and 2006.  
-
-
-```{r}
-# Identify a core group of taxa assessed every year from 1950 to 2006.  May be tricky!
-## Plot ssb and catch_landings between 1950 and 2006
-
-```

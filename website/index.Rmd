@@ -15,7 +15,6 @@ nav: true
 
 
 
-  
 ## Course Description
 
 This course provides an introduction to principles and tools for
