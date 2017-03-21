@@ -3,6 +3,10 @@ title: "Fisheries Collapse"
 
 ---
 
+Note: It may be helpful to start with this 
+[.Rmd file with code from lecture](https://github.com/ds421/rcds/blob/master/website/lectures/fish-1.Rmd)
+
+
 ## Stock Collapses
 
 Following Worm et al (2006), write a function of `current_stock` and `max_stock` that will determine if the current stock is less than 10% of the max stock observed.
