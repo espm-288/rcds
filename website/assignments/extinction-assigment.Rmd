@@ -371,7 +371,7 @@ The code below queries the first page.  How many pages will we need to get all t
 ```{r}
 ## Assignment: Adjust this code so that it reads in all pages, not just the first page:
 # Uses API V3, which requires a token.  Note here we just use the public token.
-link <- paste0("http://apiv3.iucnredlist.org/api/v3/species/page/", as.character(1:10), "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee")
+link <- paste0("http://apiv3.iucnredlist.org/api/v3/species/page/", as.character(0), "?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee")
 
 
 
