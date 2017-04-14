@@ -529,23 +529,15 @@ cols(
 
 <div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">## Assignment: Adjust this code so that it reads in all pages, not just the first page:
 # Uses API V3, which requires a token.  Note here we just use the public token.
-</span><span class="n">link</span> <span class="o">&lt;-</span> <span class="n">paste0</span><span class="p">(</span><span class="s2">"http://apiv3.iucnredlist.org/api/v3/species/page/"</span><span class="p">,</span> <span class="n">as.character</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">),</span> <span class="s2">"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"</span><span class="p">)</span>
+</span><span class="n">link</span> <span class="o">&lt;-</span> <span class="n">paste0</span><span class="p">(</span><span class="s2">"http://apiv3.iucnredlist.org/api/v3/species/page/"</span><span class="p">,</span> <span class="n">as.character</span><span class="p">(</span><span class="m">0</span><span class="p">),</span> <span class="s2">"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"</span><span class="p">)</span>
 
 
 
-<span class="n">r</span> <span class="o">&lt;-</span> <span class="n">httr</span><span class="o">::</span><span class="n">GET</span><span class="p">(</span><span class="n">link</span><span class="p">)</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error: length(url) == 1 is not TRUE</code></pre></div>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">out</span> <span class="o">&lt;-</span> <span class="n">httr</span><span class="o">::</span><span class="n">content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in inherits(x, "response"): object 'r' not found</code></pre></div>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">out</span><span class="o">$</span><span class="n">result</span> <span class="o">%&gt;%</span> 
+<span class="n">r</span> <span class="o">&lt;-</span> <span class="n">httr</span><span class="o">::</span><span class="n">GET</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="n">httr</span><span class="o">::</span><span class="n">content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="n">out</span><span class="o">$</span><span class="n">result</span> <span class="o">%&gt;%</span> 
   <span class="n">purrr</span><span class="o">::</span><span class="n">map_df</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span> <span class="o">%&gt;%</span> <span class="n">unlist</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="n">enframe</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="n">spread</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span> <span class="o">-&gt;</span> 
   <span class="n">all_species</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): object 'out' not found</code></pre></div>
 
 <p>B) Based on the complete data, write queries that count the number of species in each group.  Then use these numbers to compute MSY, the number extinctions per 10,000 species per 100 years, for each of the groups listed in Question 1.  How do your estimates compare to the overall historical average of about 2 MSY?</p>
 
