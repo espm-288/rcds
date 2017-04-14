@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>
+    
+     Extinctions Unit &middot; RCDS
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/rcds/public/css/poole.css">
+  <link rel="stylesheet" href="/rcds/public/css/syntax.css">
+  <link rel="stylesheet" href="/rcds/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/rcds/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/rcds/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!--
+  <script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: {autoNumber: "AMS"} }
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+      displayMath: [ ['$$','$$'], ['\[','\]'] ]
+    }
+  });       
+  </script>
+
+  -->
+</head>
+
+
+  <body class="theme-base-berkeley">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/rcds">
+          RCDS
+        </a>
+      </h1>
+      <p class="lead">Reproducible and Collaborative Data Science</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <!--      <a class="sidebar-nav-item" href="/rcds">Home</a> -->
+
+      
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/index.html">Home</a>
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/policies.html">Course Policies</a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/syllabus.html">Course Syllabus</a>
+        
+      
+
+    </nav>
+    <p>
+      <a href="https://github.com/ds421/rcds"><i class="fa fa-github"></i></a>
+      <a rel="license" property="http://creativecommons.org/ns#license" href="http://creativecommons.org/licenses/by/4.0/" ><img src="/rcds/public/img/cc-by.svg" alt="cc-by"/></a>
+    </p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <h1 id="extinctions-module">Extinctions Module</h1>
+
+<h2 id="extinctions-module-1">Extinctions Module</h2>
+
+<p><em>Are we experiencing the sixth great extinction?</em>  </p>
+
+<p>What is the current pace of extinction? Is it accelerating? How does it compare to background extinction rates?</p>
+
+<h2 id="background">Background</h2>
+
+<ul>
+  <li><a href="https://youtu.be/QsH6ytm89GI">Section Intro Video</a></li>
+  <li><a href="http://doi.org/10.1126/sciadv.1400253">Ceballos et al (2015)</a></li>
+</ul>
+
+<h2 id="computational-topics">Computational Topics</h2>
+
+<ul>
+  <li>Accessing data from a RESTful API</li>
+  <li>Error handling</li>
+  <li>JSON data format</li>
+  <li>Regular expressions</li>
+  <li>Working with missing values</li>
+</ul>
+
+<h2 id="additional-references">Additional references:</h2>
+
+<ul>
+  <li>http://www.hhmi.org/biointeractive/biodiversity-age-humans (Video)</li>
+  <li><a href="http://doi.org/10.1038/nature09678">Barnosky et al. (2011)</a></li>
+  <li><a href="http://doi.org/10.1126/science.1246752">Pimm et al (2014)</a></li>
+  <li><a href="http://dx.doi.org/10.1098/rspb.2013.3254">Sandom et al (2014)</a></li>
+</ul>
+
+<h2 id="accessing-data-from-a-rest-api">Accessing Data from a REST API</h2>
+
+<ul>
+  <li>
+    <p><strong>RE</strong>presentational State Transfer </p>
+  </li>
+  <li>
+    <p><strong>A</strong>plication <strong>P</strong>rogramming <strong>I</strong>nterface</p>
+  </li>
+</ul>
+
+<p><img src="http://maxoffsky.com/word/wp-content/uploads/2012/11/RESTful-API-design-1014x457.jpg" alt="" /></p>
+
+<h2 id="iucn-redlist-api">IUCN Redlist API</h2>
+
+<p>Example API call: </p>
+
+<p><code>http://api.iucnredlist.org/index/species/Acaena-exigua.json</code></p>
+
+<h2 id="working-with-json-data">Working with JSON data</h2>
+
+<p><code>json
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "isAlive": true,
+  "age": 25,
+  "address": {
+    "streetAddress": "21 2nd Street",
+    "city": "New York",
+    "state": "NY",
+    "postalCode": "10021-3100"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "212 555-1234"
+    }
+  ]
+}
+</code></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="s2">"jsonlite"</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="n">fromJSON</span><span class="p">(</span>
+<span class="s1">'{
+  "firstName": "John",
+  "lastName": "Smith",
+  "isAlive": true,
+  "age": 25,
+  "address": {
+    "streetAddress": "21 2nd Street",
+    "city": "New York",
+    "state": "NY",
+    "postalCode": "10021-3100"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "212 555-1234"
+    }
+  ]
+}'</span><span class="p">)</span>
+
+<span class="n">data</span><span class="o">$</span><span class="n">address</span><span class="o">$</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error: &lt;text&gt;:27:0: unexpected end of input
+25: 
+26: 
+   ^</code></pre></div>
+
+<h2 id="curl-and-rest">CURL and REST</h2>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="s2">"httr"</span><span class="p">)</span>
+
+<span class="n">resp</span> <span class="o">&lt;-</span> <span class="n">httr</span><span class="o">::</span><span class="n">GET</span><span class="p">(</span><span class="s2">"http://api.iucnredlist.org/index/species/Acaena-exigua.json"</span><span class="p">)</span>
+<span class="err">#</span><span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">as</span> <span class="o">=</span> <span class="s2">"text"</span><span class="p">)</span></code></pre></div>
+
+<h2 id="curl-and-rest-1">CURL and REST</h2>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">data</span> <span class="o">&lt;-</span> <span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+<span class="n">class</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[1] "list"</code></pre></div>
+
+<p>How’d it know??</p>
+
+<h2 id="understanding-a-response-object">Understanding a response object</h2>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">resp</span><span class="o">$</span><span class="n">headers</span><span class="o">$</span><span class="sb">`content-type`</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[1] "application/json; charset=utf-8"</code></pre></div>
+
+<h2 id="parsing-json">Parsing JSON</h2>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">hawaii_rose</span> <span class="o">&lt;-</span> <span class="n">fromJSON</span><span class="p">(</span><span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="s2">"text"</span><span class="p">))</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): could not find function "fromJSON"</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">hawaii_rose</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): object 'hawaii_rose' not found</code></pre></div>
+
+<h2 id="explicit-parsing-robust-format">explicit parsing, robust format</h2>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">hawaii_rose</span> <span class="o">&lt;-</span> <span class="n">fromJSON</span><span class="p">(</span><span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="s2">"text"</span><span class="p">),</span> <span class="n">simplifyVector</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): could not find function "fromJSON"</code></pre></div>
+
+<h1 id="working-with-regular-expressions">Working with Regular Expressions</h1>
+
+<ul>
+  <li><a href="http://regexone.com/">Self-guided Tutorial</a></li>
+  <li><a href="http://www.cheatography.com/davechild/cheat-sheets/regular-expressions/">Cheetsheet</a></li>
+  <li><a href="https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html">stringr RegEx Vignette</a></li>
+</ul>
+
+<p>example_string = “The last known individual of <em>A. exigua</em> was discovered in 1990s and has since died.”</p>
+
+<p>Match exactly 4 digits: <code>'\d{4}'</code></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">example_string</span> <span class="o">=</span> <span class="s2">"The last known individual of &lt;em&gt;A. exigua&lt;/em&gt; was discovered in 1990s and has since died."</span>
+<span class="n">stringr</span><span class="o">::</span><span class="n">str_extract</span><span class="p">(</span><span class="n">example_string</span><span class="p">,</span> <span class="s2">"\\d{4}"</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[1] "1990"</code></pre></div>
+
+<h1 id="calculating-extinction-rates-putting-it-all-together">Calculating Extinction Rates: Putting it all together</h1>
+
+<p>First, to know what queries to make to the IUCN REST API, we need a list of extinct species names.  This information can be downloaded from the IUCN website, but unfortunately this is not easily automated.  Thus we’ll download the data file using a copy already prepared for the course: </p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">extinct</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s2">"http://berkeley.carlboettiger.info/espm-88b/extinction/data/extinct.csv"</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Parsed with column specification:
+cols(
+  .default = col_character(),
+  `Species ID` = col_integer(),
+  `Red List criteria version` = col_double(),
+  `Year assessed` = col_integer()
+)</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">See spec(...) for full column specifications.</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">extinct</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 834 × 23
+   `Species ID`  Kingdom       Phylum         Class           Order
+          &lt;int&gt;    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;           &lt;chr&gt;
+1         44072  PLANTAE TRACHEOPHYTA MAGNOLIOPSIDA         ROSALES
+2        195373  PLANTAE TRACHEOPHYTA MAGNOLIOPSIDA    EUPHORBIALES
+3         37854  PLANTAE TRACHEOPHYTA MAGNOLIOPSIDA    EUPHORBIALES
+4        199821  PLANTAE TRACHEOPHYTA MAGNOLIOPSIDA    EUPHORBIALES
+5            82 ANIMALIA   ARTHROPODA       INSECTA   EPHEMEROPTERA
+6           167 ANIMALIA     MOLLUSCA    GASTROPODA STYLOMMATOPHORA
+7           170 ANIMALIA     MOLLUSCA    GASTROPODA STYLOMMATOPHORA
+8           173 ANIMALIA     MOLLUSCA    GASTROPODA STYLOMMATOPHORA
+9           174 ANIMALIA     MOLLUSCA    GASTROPODA STYLOMMATOPHORA
+10          179 ANIMALIA     MOLLUSCA    GASTROPODA STYLOMMATOPHORA
+# ... with 824 more rows, and 18 more variables: Family &lt;chr&gt;,
+#   Genus &lt;chr&gt;, Species &lt;chr&gt;, Authority &lt;chr&gt;, `Infraspecific
+#   rank` &lt;chr&gt;, `Infraspecific name` &lt;chr&gt;, `Infraspecific
+#   authority` &lt;chr&gt;, `Stock/subpopulation` &lt;chr&gt;, Synonyms &lt;chr&gt;,
+#   `Common names (Eng)` &lt;chr&gt;, `Common names (Fre)` &lt;chr&gt;, `Common
+#   names (Spa)` &lt;chr&gt;, `Red List status` &lt;chr&gt;, `Red List
+#   criteria` &lt;chr&gt;, `Red List criteria version` &lt;dbl&gt;, `Year
+#   assessed` &lt;int&gt;, `Population trend` &lt;chr&gt;, Petitioned &lt;chr&gt;</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">get_rationale</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+   <span class="n">paste0</span><span class="p">(</span><span class="s2">"http://api.iucnredlist.org/index/species/"</span><span class="p">,</span> <span class="n">x</span><span class="o">$</span><span class="n">Genus</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">,</span> <span class="n">x</span><span class="o">$</span><span class="n">Species</span><span class="p">,</span> <span class="s2">".json"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+   <span class="n">httr</span><span class="o">::</span><span class="n">GET</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">resp</span>
+  
+   <span class="k">if</span><span class="p">(</span><span class="n">resp</span><span class="o">$</span><span class="n">status_code</span> <span class="o">==</span> <span class="m">200</span><span class="p">){</span>
+   <span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">json</span>
+     <span class="k">if</span><span class="p">(</span><span class="s2">"rationale"</span> <span class="o">%</span><span class="k">in</span><span class="o">%</span> <span class="n">names</span><span class="p">(</span><span class="n">json</span><span class="p">[[</span><span class="m">1</span><span class="p">]])){</span>
+       
+         <span class="n">json</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="o">$</span><span class="n">rationale</span>
+        
+
+     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="n">NA</span>
+     <span class="p">}</span>
+   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="n">NA</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">get_rationale</span><span class="p">(</span><span class="n">extinct</span><span class="p">[</span><span class="m">3</span><span class="p">,])</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">NULL</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">extinct</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,]</span> <span class="o">%&gt;%</span> 
+  <span class="n">select</span><span class="p">(</span><span class="n">Genus</span><span class="p">,</span> <span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+ <span class="n">purrr</span><span class="o">::</span><span class="n">by_row</span><span class="p">(</span><span class="n">get_rationale</span><span class="p">,</span> <span class="n">.to</span> <span class="o">=</span> <span class="s2">"rationale"</span><span class="p">,</span> <span class="n">.collate</span> <span class="o">=</span> <span class="s2">"rows"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df</span>
+
+<span class="n">df</span> <span class="o">%&gt;%</span> <span class="n">mutate</span><span class="p">(</span><span class="n">last_seen</span> <span class="o">=</span> <span class="n">stringr</span><span class="o">::</span><span class="n">str_extract</span><span class="p">(</span><span class="n">rationale</span><span class="p">,</span> <span class="s2">"\\d{4}"</span><span class="p">))</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 3 × 4
+     Genus      Species
+     &lt;chr&gt;        &lt;chr&gt;
+1   Acaena       exigua
+2 Acalypha dikuluwensis
+3 Acalypha      wilderi
+# ... with 2 more variables: rationale &lt;chr&gt;, last_seen &lt;chr&gt;</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">resp</span> <span class="o">&lt;-</span> <span class="n">httr</span><span class="o">::</span><span class="n">GET</span><span class="p">(</span><span class="s2">"http://api.iucnredlist.org/index/species/Acaena-exigua.json"</span><span class="p">)</span>
+<span class="n">json</span> <span class="o">&lt;-</span> <span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+<span class="n">json</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="o">$</span><span class="n">rationale</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[1] "The last known individual of &lt;em&gt;A. exigua&lt;/em&gt; was discovered in 1990s and has since died."</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">stringr</span><span class="o">::</span><span class="n">str_extract</span><span class="p">(</span><span class="n">example_string</span><span class="p">,</span> <span class="s2">"\\d{4}"</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">[1] "1990"</code></pre></div>
+
+<h2 id="getting-a-date-using-regex">Getting a Date using RegEx</h2>
+
+<p>Next, we will need a function that can extract a date from the text of the “rationale” column returned by the API. Here we’ll use our knowledge of <em>regular expressions</em>.  Our function must meet the following criteria:</p>
+
+<ul>
+  <li>Return the year from a string of text.</li>
+  <li>Return <code>NA</code> (for missing value) if no date can be found</li>
+  <li>Format the date year as a numeric value</li>
+</ul>
+
+<h2 id="calling-the-api--error-handling">Calling the API &amp; Error Handling</h2>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">httr</span><span class="p">)</span>
+
+<span class="n">extinct</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,]</span> <span class="o">%&gt;%</span> 
+  <span class="n">select</span><span class="p">(</span><span class="n">Genus</span><span class="p">,</span> <span class="n">Species</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">purrr</span><span class="o">::</span><span class="n">by_row</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+  <span class="n">paste0</span><span class="p">(</span><span class="s1">'http://api.iucnredlist.org/index/species/'</span><span class="p">,</span> <span class="n">x</span><span class="o">$</span><span class="n">Genus</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="n">x</span><span class="o">$</span><span class="n">Species</span><span class="p">,</span> <span class="s1">'.json'</span><span class="p">)</span>
+<span class="p">},</span> 
+<span class="n">.to</span> <span class="o">=</span> <span class="s2">"last_seen"</span><span class="p">,</span> <span class="n">.collate</span> <span class="o">=</span> <span class="s2">"rows"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">df</span>
+
+<span class="n">df</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 5 × 3
+            Genus      Species
+            &lt;chr&gt;        &lt;chr&gt;
+1          Acaena       exigua
+2        Acalypha dikuluwensis
+3        Acalypha  rubrinervis
+4        Acalypha      wilderi
+5 Acanthametropus   pecatonica
+# ... with 1 more variables: last_seen &lt;chr&gt;</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">get_rationale</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">){</span>
+    <span class="n">resp</span> <span class="o">&lt;-</span> <span class="n">paste0</span><span class="p">(</span><span class="s1">'http://api.iucnredlist.org/index/species/'</span><span class="p">,</span> <span class="n">x</span><span class="o">$</span><span class="n">Genus</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="n">x</span><span class="o">$</span><span class="n">Species</span><span class="p">,</span> <span class="s1">'.json'</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">httr</span><span class="o">::</span><span class="n">GET</span><span class="p">()</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="n">resp</span><span class="o">$</span><span class="n">status_code</span> <span class="o">==</span> <span class="m">200</span><span class="p">){</span>
+      <span class="n">out</span> <span class="o">&lt;-</span> 
+        <span class="n">resp</span> <span class="o">%&gt;%</span>
+        <span class="n">httr</span><span class="o">::</span><span class="n">content</span><span class="p">(</span><span class="n">as</span> <span class="o">=</span> <span class="s2">"text"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+        <span class="n">fromJSON</span><span class="p">(</span><span class="n">simplifyVector</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span>
+      
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">is.null</span><span class="p">(</span><span class="n">out</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="o">$</span><span class="n">rationale</span><span class="p">)){</span>
+        <span class="n">as.character</span><span class="p">(</span><span class="n">out</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="o">$</span><span class="n">rationale</span><span class="p">)</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">as.character</span><span class="p">(</span><span class="n">NA</span><span class="p">)</span>
+      <span class="p">}</span>
+      
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">as.character</span><span class="p">(</span><span class="n">NA</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span> <span class="o">&lt;-</span> <span class="n">extinct</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,]</span> <span class="o">%&gt;%</span> 
+  <span class="n">select</span><span class="p">(</span><span class="n">Genus</span><span class="p">,</span> <span class="n">Species</span><span class="p">,</span> <span class="sb">`Species ID`</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+  <span class="n">purrr</span><span class="o">::</span><span class="n">by_row</span><span class="p">(</span><span class="n">get_rationale</span><span class="p">,</span> <span class="n">.to</span> <span class="o">=</span> <span class="s2">"rationale"</span><span class="p">,</span> <span class="n">.collate</span> <span class="o">=</span> <span class="s2">"rows"</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in function_list[[k]](value): could not find function "fromJSON"</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 5 × 3
+            Genus      Species
+            &lt;chr&gt;        &lt;chr&gt;
+1          Acaena       exigua
+2        Acalypha dikuluwensis
+3        Acalypha  rubrinervis
+4        Acalypha      wilderi
+5 Acanthametropus   pecatonica
+# ... with 1 more variables: last_seen &lt;chr&gt;</code></pre></div>
+
+<h2 id="here-we-go">Here we go</h2>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span> <span class="o">&lt;-</span> <span class="n">extinct</span> <span class="o">%&gt;%</span> 
+    <span class="n">select</span><span class="p">(</span><span class="n">Genus</span><span class="p">,</span> <span class="n">Species</span><span class="p">,</span> <span class="sb">`Species ID`</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+    <span class="n">purrr</span><span class="o">::</span><span class="n">by_row</span><span class="p">(</span><span class="n">get_rationale</span><span class="p">,</span> <span class="n">.to</span> <span class="o">=</span> <span class="s2">"rationale"</span><span class="p">,</span> <span class="n">.collate</span> <span class="o">=</span> <span class="s2">"rows"</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in function_list[[k]](value): could not find function "fromJSON"</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 5 × 3
+            Genus      Species
+            &lt;chr&gt;        &lt;chr&gt;
+1          Acaena       exigua
+2        Acalypha dikuluwensis
+3        Acalypha  rubrinervis
+4        Acalypha      wilderi
+5 Acanthametropus   pecatonica
+# ... with 1 more variables: last_seen &lt;chr&gt;</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span> <span class="o">%&gt;%</span> <span class="n">mutate</span><span class="p">(</span><span class="n">last_seen</span> <span class="o">=</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">str_extract</span><span class="p">(</span><span class="n">rationale</span><span class="p">,</span> <span class="s2">"\\d{4}"</span><span class="p">)))</span> <span class="o">-&gt;</span> <span class="n">dates</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(substitute(expr), envir, enclos): could not find function "str_extract"</code></pre></div>
+
+<h2 id="histogram-of-extinction-dates">Histogram of Extinction Dates</h2>
+
+<p>We can get a sense for the tempo of extinctions by plotting extinctions since 1500 in 25-year interval bins.  </p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dates</span> <span class="o">%&gt;%</span> <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">last_seen</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_histogram</span><span class="p">()</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): object 'dates' not found</code></pre></div>
+
+<h1 id="exercises">Exercises</h1>
+
+<h1 id="question-1-extinctions-by-group">Question 1: Extinctions by group</h1>
+
+<p>A. Compute the number of extinctions from 1500 - 1900 and from 1900 to present of each of the following taxonomic groups: </p>
+
+<ul>
+  <li>Vertebrates</li>
+  <li>Mammals</li>
+  <li>Birds</li>
+  <li>Fish</li>
+  <li>Amphibians</li>
+  <li>Reptiles</li>
+  <li>Insects</li>
+  <li>Plants</li>
+</ul>
+
+<p>Compare your estimates to Table 1 of <a href="http://doi.org/10.1126/sciadv.1400253">Ceballos et al (2015)</a>.  </p>
+
+<h2 id="question-2-weighing-by-number-of-species">Question 2: Weighing by number of species</h2>
+
+<p>The number of species going extinct per century in a given taxonomic group will be influenced by how many species are present in the group to begin with. (For an obvious example, the number of vertebrate extinctions is always going to be higher than the number of mammal extinctions, since mammals are vertebrates).  Overall, these numbers do not change greatly over a period of a few hundred years, so we were able to make the relative comparisons between the roughly pre-industrial and post-industrial periods above.  </p>
+
+<p>As discussed by Tony Barnosky in the introductory video (or in <a href="http://doi.org/10.1126/sciadv.1400253">Ceballos et al (2015)</a> paper), if we want to compare these extinction rates against the long-term palentological record, it is necessary to weigh the rates by the total number of species. That is, to compute the number of extinctions per million species per year (MSY; equivalently, the number extinctions per 10,000 species per 100 years).  </p>
+
+<p>A) First, we will compute how many species are present in each of the taxonomic groups.  To do so, we need a table that has not only extinct species, but all assessed species.  We will once again query this information from the IUCN API.</p>
+
+<p>This is going to involve a lot of data – more than the API can serve in a single chunk.  Instead, the API breaks the returns up into groups of 10,000 species per page (see API docs: http://apiv3.iucnredlist.org/api/v3/docs#species).  Luckily, the API also tells us the total number of species:</p>
+
+<p>http://apiv3.iucnredlist.org/api/v3/speciescount?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee</p>
+
+<p>The code below queries the first page.  How many pages will we need to get all the data?  Modify the example below to collect all of the data into a single DataFrame.  Note the use of <code>append</code> to add data to an existing data.frame with matching column labels.  </p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">## Assignment: Adjust this code so that it reads in all pages, not just the first page:
+# Uses API V3, which requires a token.  Note here we just use the public token.
+</span><span class="n">link</span> <span class="o">&lt;-</span> <span class="n">paste0</span><span class="p">(</span><span class="s2">"http://apiv3.iucnredlist.org/api/v3/species/page/"</span><span class="p">,</span> <span class="n">as.character</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">),</span> <span class="s2">"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee"</span><span class="p">)</span>
+
+
+
+<span class="n">r</span> <span class="o">&lt;-</span> <span class="n">httr</span><span class="o">::</span><span class="n">GET</span><span class="p">(</span><span class="n">link</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error: length(url) == 1 is not TRUE</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">out</span> <span class="o">&lt;-</span> <span class="n">httr</span><span class="o">::</span><span class="n">content</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in inherits(x, "response"): object 'r' not found</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">out</span><span class="o">$</span><span class="n">result</span> <span class="o">%&gt;%</span> 
+  <span class="n">purrr</span><span class="o">::</span><span class="n">map_df</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span> <span class="o">%&gt;%</span> <span class="n">unlist</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="n">enframe</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="n">spread</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span> <span class="o">-&gt;</span> 
+  <span class="n">all_species</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): object 'out' not found</code></pre></div>
+
+<p>B) Based on the complete data, write queries that count the number of species in each group.  Then use these numbers to compute MSY, the number extinctions per 10,000 species per 100 years, for each of the groups listed in Question 1.  How do your estimates compare to the overall historical average of about 2 MSY?</p>
+
+<h2 id="question-3-improving-our-algorithm">Question 3: Improving our algorithm</h2>
+
+<p>In parsing the data with regular expressions, we encountered certain data that resulted in missing values.  Identify and investigate the strings for which we were not able to extract a date value.  </p>
+
+<ul>
+  <li>Why did the date extraction fail?  </li>
+  <li>Can you deduce an approximate date by examining the text? </li>
+  <li>Can you modify the regular expression to reduce the number of missing values?  </li>
+  <li>How do these missing values impact our overall estimate of the extinction rate? (In which direction, and by approximately what amount?)</li>
+</ul>
+
+<h2 id="question-4-looking-forward-bonus">Question 4: Looking forward (bonus)</h2>
+
+<p>Plot the MSY rates in intervals of 50 years for each of the groups as a line plot (compare to Figure 1a of <a href="http://doi.org/10.1126/sciadv.1400253">Ceballos et al (2015)</a> paper).  Compute the slope of these curves to forecast the extinction rate in 2100.  </p>
+
+    </div>
+
+  </body>
+</html>
