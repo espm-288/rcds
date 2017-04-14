@@ -216,12 +216,19 @@
   ]
 }'</span><span class="p">)</span>
 
-<span class="n">data</span><span class="o">$</span><span class="n">address</span><span class="o">$</span></code></pre></div>
+<span class="n">data</span><span class="o">$</span><span class="n">address</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error: &lt;text&gt;:27:0: unexpected end of input
-25: 
-26: 
-   ^</code></pre></div>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$streetAddress
+[1] "21 2nd Street"
+
+$city
+[1] "New York"
+
+$state
+[1] "NY"
+
+$postalCode
+[1] "10021-3100"</code></pre></div>
 
 <h2 id="curl-and-rest">CURL and REST</h2>
 
@@ -247,19 +254,31 @@
 
 <h2 id="parsing-json">Parsing JSON</h2>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">hawaii_rose</span> <span class="o">&lt;-</span> <span class="n">fromJSON</span><span class="p">(</span><span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="s2">"text"</span><span class="p">))</span></code></pre></div>
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">hawaii_rose</span> <span class="o">&lt;-</span> <span class="n">fromJSON</span><span class="p">(</span><span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="s2">"text"</span><span class="p">))</span>
+<span class="n">hawaii_rose</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): could not find function "fromJSON"</code></pre></div>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">hawaii_rose</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): object 'hawaii_rose' not found</code></pre></div>
+<div class="highlight"><pre><code class="language-text" data-lang="text">scientific_name primary kingdom       phylum         class   order
+1   Acaena exigua    TRUE PLANTAE TRACHEOPHYTA MAGNOLIOPSIDA ROSALES
+    family  genus species authority infra_name infra_rank
+1 ROSACEAE Acaena  exigua    A.Gray         NA         NA
+  infra_authority stock_name species_id main_common_name
+1              NA         NA      44072               NA
+  modified_year category criteria assessmentid trend_id biome_marine
+1          2003       EX       NA     10855072       NA        FALSE
+  biome_freshwater biome_terrestrial
+1            FALSE              TRUE
+                                                                                            taxonomicnotes
+1 Held as "D" for now - need to confirm whether this was recently rediscovered. Have asked Vickie Caraway.
+                                                                                    rationale
+1 The last known individual of &lt;em&gt;A. exigua&lt;/em&gt; was discovered in 1990s and has since died.
+                       assessor
+1 Bruegmann, M.M. &amp; Caraway, V.
+                                                                               evaluator
+1 Maunder, M. (Plant Conservation Committee) &amp; Dickinson, T. (Red List Programme Office)</code></pre></div>
 
 <h2 id="explicit-parsing-robust-format">explicit parsing, robust format</h2>
 
 <div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">hawaii_rose</span> <span class="o">&lt;-</span> <span class="n">fromJSON</span><span class="p">(</span><span class="n">content</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="s2">"text"</span><span class="p">),</span> <span class="n">simplifyVector</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): could not find function "fromJSON"</code></pre></div>
 
 <h1 id="working-with-regular-expressions">Working with Regular Expressions</h1>
 
@@ -421,45 +440,47 @@ cols(
 
 <div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span> <span class="o">&lt;-</span> <span class="n">extinct</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,]</span> <span class="o">%&gt;%</span> 
   <span class="n">select</span><span class="p">(</span><span class="n">Genus</span><span class="p">,</span> <span class="n">Species</span><span class="p">,</span> <span class="sb">`Species ID`</span><span class="p">)</span> <span class="o">%&gt;%</span> 
-  <span class="n">purrr</span><span class="o">::</span><span class="n">by_row</span><span class="p">(</span><span class="n">get_rationale</span><span class="p">,</span> <span class="n">.to</span> <span class="o">=</span> <span class="s2">"rationale"</span><span class="p">,</span> <span class="n">.collate</span> <span class="o">=</span> <span class="s2">"rows"</span><span class="p">)</span></code></pre></div>
+  <span class="n">purrr</span><span class="o">::</span><span class="n">by_row</span><span class="p">(</span><span class="n">get_rationale</span><span class="p">,</span> <span class="n">.to</span> <span class="o">=</span> <span class="s2">"rationale"</span><span class="p">,</span> <span class="n">.collate</span> <span class="o">=</span> <span class="s2">"rows"</span><span class="p">)</span> 
+<span class="n">df</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in function_list[[k]](value): could not find function "fromJSON"</code></pre></div>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 5 × 3
-            Genus      Species
-            &lt;chr&gt;        &lt;chr&gt;
-1          Acaena       exigua
-2        Acalypha dikuluwensis
-3        Acalypha  rubrinervis
-4        Acalypha      wilderi
-5 Acanthametropus   pecatonica
-# ... with 1 more variables: last_seen &lt;chr&gt;</code></pre></div>
+<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 10 × 4
+             Genus      Species `Species ID`
+             &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt;
+1           Acaena       exigua        44072
+2         Acalypha dikuluwensis       195373
+3         Acalypha  rubrinervis        37854
+4         Acalypha      wilderi       199821
+5  Acanthametropus   pecatonica           82
+6      Achatinella   abbreviata          167
+7      Achatinella       buddii          170
+8      Achatinella       caesia          173
+9      Achatinella        casta          174
+10     Achatinella       decora          179
+# ... with 1 more variables: rationale &lt;chr&gt;</code></pre></div>
 
 <h2 id="here-we-go">Here we go</h2>
 
 <div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span> <span class="o">&lt;-</span> <span class="n">extinct</span> <span class="o">%&gt;%</span> 
     <span class="n">select</span><span class="p">(</span><span class="n">Genus</span><span class="p">,</span> <span class="n">Species</span><span class="p">,</span> <span class="sb">`Species ID`</span><span class="p">)</span> <span class="o">%&gt;%</span> 
-    <span class="n">purrr</span><span class="o">::</span><span class="n">by_row</span><span class="p">(</span><span class="n">get_rationale</span><span class="p">,</span> <span class="n">.to</span> <span class="o">=</span> <span class="s2">"rationale"</span><span class="p">,</span> <span class="n">.collate</span> <span class="o">=</span> <span class="s2">"rows"</span><span class="p">)</span></code></pre></div>
+    <span class="n">purrr</span><span class="o">::</span><span class="n">by_row</span><span class="p">(</span><span class="n">get_rationale</span><span class="p">,</span> <span class="n">.to</span> <span class="o">=</span> <span class="s2">"rationale"</span><span class="p">,</span> <span class="n">.collate</span> <span class="o">=</span> <span class="s2">"rows"</span><span class="p">)</span> 
+<span class="n">df</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in function_list[[k]](value): could not find function "fromJSON"</code></pre></div>
-
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 5 × 3
-            Genus      Species
-            &lt;chr&gt;        &lt;chr&gt;
-1          Acaena       exigua
-2        Acalypha dikuluwensis
-3        Acalypha  rubrinervis
-4        Acalypha      wilderi
-5 Acanthametropus   pecatonica
-# ... with 1 more variables: last_seen &lt;chr&gt;</code></pre></div>
+<div class="highlight"><pre><code class="language-text" data-lang="text"># A tibble: 834 × 4
+             Genus      Species `Species ID`
+             &lt;chr&gt;        &lt;chr&gt;        &lt;int&gt;
+1           Acaena       exigua        44072
+2         Acalypha dikuluwensis       195373
+3         Acalypha  rubrinervis        37854
+4         Acalypha      wilderi       199821
+5  Acanthametropus   pecatonica           82
+6      Achatinella   abbreviata          167
+7      Achatinella       buddii          170
+8      Achatinella       caesia          173
+9      Achatinella        casta          174
+10     Achatinella       decora          179
+# ... with 824 more rows, and 1 more variables: rationale &lt;chr&gt;</code></pre></div>
 
 <div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">df</span> <span class="o">%&gt;%</span> <span class="n">mutate</span><span class="p">(</span><span class="n">last_seen</span> <span class="o">=</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">str_extract</span><span class="p">(</span><span class="n">rationale</span><span class="p">,</span> <span class="s2">"\\d{4}"</span><span class="p">)))</span> <span class="o">-&gt;</span> <span class="n">dates</span></code></pre></div>
-
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(substitute(expr), envir, enclos): could not find function "str_extract"</code></pre></div>
 
 <h2 id="histogram-of-extinction-dates">Histogram of Extinction Dates</h2>
 
@@ -467,7 +488,11 @@ cols(
 
 <div class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">dates</span> <span class="o">%&gt;%</span> <span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">last_seen</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_histogram</span><span class="p">()</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">Error in eval(expr, envir, enclos): object 'dates' not found</code></pre></div>
+<div class="highlight"><pre><code class="language-text" data-lang="text">`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">Warning: Removed 414 rows containing non-finite values (stat_bin).</code></pre></div>
+
+<p><img src="/rcds/figure/assignments/extinction-assigment/unnamed-chunk-18-1.svg" alt="plot of chunk unnamed-chunk-18" /></p>
 
 <h1 id="exercises">Exercises</h1>
 
