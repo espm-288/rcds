@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fisheries Collapse</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="fish-1_files/rmdshower/node_modules/shower-material/styles/screen-16x10.css">
+  <link rel="stylesheet" href="fish-1_files/rmdshower/style-common.css">
+  <link rel="stylesheet" href="fish-1_files/rmdshower/style-material.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+  <script src="fish-1_files/rmdshower/auto-render.min.js" type="text/javascript"></script>
+  
+  
+    <style type="text/css">
+   div.sourceCode { overflow-x: auto; }
+   table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+     margin: 0; padding: 0; vertical-align: baseline; border: none; }
+   table.sourceCode { width: 100%; line-height: 100%; }
+   td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+   td.sourceCode { padding-left: 5px; }
+   code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code > span.dt { color: #902000; } /* DataType */
+   code > span.dv { color: #40a070; } /* DecVal */
+   code > span.bn { color: #40a070; } /* BaseN */
+   code > span.fl { color: #40a070; } /* Float */
+   code > span.ch { color: #4070a0; } /* Char */
+   code > span.st { color: #4070a0; } /* String */
+   code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code > span.ot { color: #007020; } /* Other */
+   code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code > span.fu { color: #06287e; } /* Function */
+   code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+   code > span.cn { color: #880000; } /* Constant */
+   code > span.sc { color: #4070a0; } /* SpecialChar */
+   code > span.vs { color: #4070a0; } /* VerbatimString */
+   code > span.ss { color: #bb6688; } /* SpecialString */
+   code > span.im { } /* Import */
+   code > span.va { color: #19177c; } /* Variable */
+   code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code > span.op { color: #666666; } /* Operator */
+   code > span.bu { } /* BuiltIn */
+   code > span.ex { } /* Extension */
+   code > span.pp { color: #bc7a00; } /* Preprocessor */
+   code > span.at { color: #7d9029; } /* Attribute */
+   code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  
+  
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>Fisheries Collapse</h1>
+    <p>Carl Boettiger</p>
+  </header>
+
+    
+  
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr::opts_chunk$<span class="kw">set</span>(<span class="dt">message=</span><span class="ot">FALSE</span>, <span class="dt">warning =</span> <span class="ot">FALSE</span>)</code></pre></div>
+</section>
+<section id="unit-iii-global-fisheries-collapse" class="titleslide slide level1"><h2 class="shout">Unit III: Global Fisheries Collapse?</h2></section><section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=3fCX6XKzbUY">Atlantic Cod History</a></li>
+<li><a href="https://www.youtube.com/watch?v=H6WOvY_C-_I">“End of the Line” Trailer</a></li>
+</ul>
+</section><section id="atlantic-cod-history" class="slide level2">
+<h2>Atlantic Cod History</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3fCX6XKzbUY" frameborder="0" allowfullscreen>
+</iframe>
+</section><section id="end-of-the-line" class="slide level2">
+<h2>End of the Line</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/H6WOvY_C-_I" frameborder="0" allowfullscreen>
+</iframe>
+</section><section id="cod-collapse" class="slide level2">
+<h2>Cod Collapse</h2>
+<p><img src="http://berkeley.carlboettiger.info/espm-88b/fish/img/codcollapse.jpg" width=600></p>
+<p>Source: <a href="http://www.millenniumassessment.org/documents/document.356.aspx.pdf" class="uri">http://www.millenniumassessment.org/documents/document.356.aspx.pdf</a></p>
+</section><section id="global-fisheries-trends" class="slide level2">
+<h2>Global fisheries trends</h2>
+<p><img src="http://berkeley.carlboettiger.info/espm-88b/img/worm2006.png" width=700 height = 500></p>
+<h3 id="source-worm-et-al.-2006-science">Source: <a href="http://doi.org/10.1126/science.1132294">Worm et al. 2006 <em>Science</em></a></h3>
+</section><section id="media-version" class="slide level2">
+<h2>Media version</h2>
+<ul>
+<li><a href="http://www.nytimes.com/2006/11/03/science/03fish.html?_r=0">New York Times: “Study Sees ‘Global Collapse’ of Fish Species”</a></li>
+<li><a href="http://news.bbc.co.uk/2/hi/science/nature/6108414.stm">BBC declares: ‘Only 50 years left’ for sea fish</a></li>
+</ul>
+<p><img src="http://graphics8.nytimes.com/images/2006/11/02/us/1103-nat-webFISH.gif" /></p>
+</section><section id="the-database" class="slide level2">
+<h2>The Database</h2>
+<p><a href="http://ramlegacy.marinebiodiversity.ca/ram-legacy-stock-assessment-database">RAM Legacy Stock Assessment Database</a></p>
+<p><img src="http://ramlegacy.marinebiodiversity.ca/ram-legacy-stock-assessment-database/ram-legacy-entity-relationship-diagram" width=700></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;readxl&quot;</span>)</code></pre></div>
+</section><section id="reading-in-the-tables" class="slide level2">
+<h2>Reading in the tables</h2>
+<!-- 
+
+
+```r
+values <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/values.csv")
+assessment <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/assessment.csv")
+stock <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/stock.csv")
+units <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/units.csv")
+area  <- read_csv("http://berkeley.carlboettiger.info/espm-88b/fish/data/area.csv")
+```
+
+
+-->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;https://depts.washington.edu/ramlegac/wordpress/databaseVersions/RLSADB_v3.0_(assessment_data_only)_excel.zip&quot;</span>, 
+              <span class="st">&quot;ramlegacy.zip&quot;</span>)
+path &lt;-<span class="st"> </span><span class="kw">unzip</span>(<span class="st">&quot;ramlegacy.zip&quot;</span>)
+sheets &lt;-<span class="st"> </span>readxl::<span class="kw">excel_sheets</span>(path)
+ram &lt;-<span class="st"> </span><span class="kw">lapply</span>(sheets, readxl::read_excel, <span class="dt">path =</span> path)
+<span class="kw">names</span>(ram) &lt;-<span class="st"> </span>sheets
+
+## Name the available tables:
+<span class="kw">names</span>(ram)</code></pre></div>
+<pre><code>##  [1] &quot;area&quot;                    &quot;assessment&quot;             
+##  [3] &quot;assessmethod&quot;            &quot;assessor&quot;               
+##  [5] &quot;biometrics&quot;              &quot;bioparams&quot;              
+##  [7] &quot;bioparams_ids_views&quot;     &quot;bioparams_units_views&quot;  
+##  [9] &quot;bioparams_values_views&quot;  &quot;management&quot;             
+## [11] &quot;stock&quot;                   &quot;taxonomy&quot;               
+## [13] &quot;timeseries&quot;              &quot;timeseries_ids_views&quot;   
+## [15] &quot;timeseries_units_views&quot;  &quot;timeseries_values_views&quot;
+## [17] &quot;tsmetrics&quot;</code></pre>
+</section><section id="exploring-the-database-a-birds-eye-view" class="slide level2">
+<h2>Exploring the Database: a bird’s eye view</h2>
+<ul>
+<li>“Tidy Data”: Codd’s Third Normal form:</li>
+</ul>
+<blockquote>
+<p>Each row must describe the Key, the Whole Key, and Nothing But the Key (so help me Cobb)</p>
+</blockquote>
+</section><section id="what-is-a-stock-assessment" class="slide level2">
+<h2>What is a Stock Assessment?</h2>
+<ul>
+<li>From the Assessment Table, id: <a href="http://www.afsc.noaa.gov/REFM/docs/2010/GOApop.pdf" class="uri">http://www.afsc.noaa.gov/REFM/docs/2010/GOApop.pdf</a></li>
+<li>From said pdf, methods (in 2009 assessment): <a href="http://www.afsc.noaa.gov/refm/docs/2009/GOApop.pdf" class="uri">http://www.afsc.noaa.gov/refm/docs/2009/GOApop.pdf</a></li>
+</ul>
+<blockquote>
+<p>When treated this way, our stock assessment is a large Bayesian model, which includes informative (e.g., lognormal natural mortality with a small CV) and noninformative (or nearly so, such as a parameter bounded between 0 and 10) prior distributions. In the model presented in this SAFE report, the number of parameters estimated is 134.</p>
+</blockquote>
+<p>– <a href="http://www.afsc.noaa.gov/refm/docs/2009/GOApop.pdf" class="uri">http://www.afsc.noaa.gov/refm/docs/2009/GOApop.pdf</a> pg 757</p>
+</section><section id="task-1-investigating-cod-collapse" class="slide level2">
+<h2>Task 1: Investigating Cod Collapse</h2>
+<p><img src="http://berkeley.carlboettiger.info/espm-88b/fish/img/codcollapse.jpg" width=600></p>
+</section><section id="step-1-joining-up-the-data" class="slide level2">
+<h2>Step 1: Joining up the data</h2>
+<p>We want a table with the following additional columns: <code>&quot;country&quot;</code>, <code>&quot;ssb_unit&quot;</code>, <code>&quot;catch_landings_unit&quot;</code>, <code>&quot;scientificname&quot;</code>, <code>&quot;commonname&quot;</code>, <code>&quot;year&quot;</code>, <code>&quot;ssb&quot;</code>, and <code>&quot;TC&quot;</code> columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ram$timeseries_values_views %&gt;%
+<span class="st">  </span><span class="kw">select</span>(assessid, stockid, year, SSB, TC) %&gt;%
+<span class="st">  </span><span class="kw">left_join</span>(ram$stock) %&gt;%
+<span class="st">  </span><span class="kw">left_join</span>(ram$area) %&gt;%<span class="st"> </span>
+<span class="st">   </span><span class="kw">select</span>(assessid, stockid, scientificname, commonname, country, year, SSB, TC) %&gt;%
+<span class="st">  </span><span class="kw">left_join</span>(ram$timeseries_units_views %&gt;%<span class="st"> </span>
+<span class="st">      </span><span class="kw">rename</span>(<span class="dt">TC_units =</span> TC, <span class="dt">SSB_units =</span> SSB)) %&gt;%<span class="st"> </span>
+<span class="st">   </span><span class="kw">select</span>(scientificname, commonname, country, year, SSB, TC, SSB_units, TC_units) -&gt;<span class="st"> </span>
+df</code></pre></div>
+</section><section id="step-2-dealing-with-missing-values" class="slide level2">
+<h2>Step 2: Dealing with missing values</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(commonname, year) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">catch =</span> <span class="kw">sum</span>(TC)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(commonname ==<span class="st"> &quot;Atlantic cod&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, catch)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+</section><section id="step-2-dealing-with-missing-values-1" class="slide level2">
+<h2>Step 2: Dealing with missing values</h2>
+<p><img src="fish-1_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" /></p>
+</section><section id="step-3-aggregating-over-assessments" class="slide level2">
+<h2>Step 3: Aggregating over assessments</h2>
+<p>Different stock assessments will cover different regions and times for the same species. To get the full picture of what is happening to any given species, we must sum up the stocks over all of these assessments in a given year.</p>
+<p>Use <code>groups</code> to sum over the <code>TC</code> and <code>ssb</code> data for each year for each species, then select the “Atlantic cod” and plot their <code>TC</code> over time.</p>
+</section><section id="step-3-aggregating-over-assessments-1" class="slide level2">
+<h2>Step 3: Aggregating over assessments</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(commonname, year) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">catch =</span> <span class="kw">sum</span>(TC, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(commonname ==<span class="st"> &quot;Atlantic cod&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, catch)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+</section><section id="step-3-aggregating-over-assessments-2" class="slide level2">
+<h2>Step 3: Aggregating over assessments</h2>
+<p><img src="fish-1_files/figure-revealjs/unnamed-chunk-9-1.png" width="768" /></p>
+</section><section id="matching-the-mea-plot" class="slide level2">
+<h2>Matching the MEA plot</h2>
+<p>Not quite right! This doesn’t seem to quite match the pattern shown by Millennium Ecosystem Assessment plot. The early years look good, but the total landings here are much larger. Is this a real discrepancy in the data or have we forgotten something?</p>
+<p>The Millenium Ecosystem Assessment does not spell out their data sources, but it does have one hint: their figure just shows fishing off the banks of Newfoundland. We can see where else Atlantic cod can be found by joining the <code>areas</code> table and <code>stockid</code> table:</p>
+<p>Let’s try just looking at all stock assessessments from Canadian waters instead. Modify the plot to show just those cod caught by Canada. We’ll need to group by an extra variable now as well.</p>
+</section><section id="matching-the-mea-plot-1" class="slide level2">
+<h2>Matching the MEA plot</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(commonname, country, year) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">catch =</span> <span class="kw">sum</span>(TC, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(commonname ==<span class="st"> &quot;Atlantic cod&quot;</span>, country ==<span class="st"> &quot;Canada&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, catch)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+</section><section id="matching-the-mea-plot-2" class="slide level2">
+<h2>Matching the MEA plot</h2>
+<p><img src="fish-1_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" /></p>
+</section><section id="accounting-for-units" class="slide level2">
+<h2>Accounting for units</h2>
+<p>Not perfect, but much better. What about those pesky units? Determine whether all <code>CT</code> in your plot are using the same units: e.g. MT or (Metric Tonnes), vs E03 (thousands of fish).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df %&gt;%<span class="st"> </span><span class="kw">filter</span>(TC_units ==<span class="st"> &quot;MT&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(commonname, country, year) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">catch =</span> <span class="kw">sum</span>(TC, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(commonname ==<span class="st"> &quot;Atlantic cod&quot;</span>, country ==<span class="st"> &quot;Canada&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, catch)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+</section><section id="accounting-for-units-1" class="slide level2">
+<h2>Accounting for units</h2>
+<p><img src="fish-1_files/figure-revealjs/unnamed-chunk-13-1.png" width="768" /></p>
+</section><section id="accounting-for-units-2" class="slide level2">
+<h2>Accounting for units</h2>
+<p>Excellent! All the same units so no need to start worrying about the average weight of a cod fish. Our result is not a perfect match to the MEA, but pretty close. On to part II to evaluate global collapse trends.</p>
+</section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="fish-1_files/rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+    <script>renderMathInElement(document.body);</script>
+  
+  
+</body>
+</html>

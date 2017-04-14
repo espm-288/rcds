@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>
+    
+     Fisheries Collapse &middot; RCDS
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/rcds/public/css/poole.css">
+  <link rel="stylesheet" href="/rcds/public/css/syntax.css">
+  <link rel="stylesheet" href="/rcds/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/rcds/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/rcds/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!--
+  <script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: {autoNumber: "AMS"} }
+    tex2jax: {
+      inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+      displayMath: [ ['$$','$$'], ['\[','\]'] ]
+    }
+  });       
+  </script>
+
+  -->
+</head>
+
+
+  <body class="theme-base-berkeley">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/rcds">
+          RCDS
+        </a>
+      </h1>
+      <p class="lead">Reproducible and Collaborative Data Science</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <!--      <a class="sidebar-nav-item" href="/rcds">Home</a> -->
+
+      
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/index.html">Home</a>
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/policies.html">Course Policies</a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <a class="sidebar-nav-item" href="/rcds/syllabus.html">Course Syllabus</a>
+        
+      
+
+    </nav>
+    <p>
+      <a href="https://github.com/ds421/rcds"><i class="fa fa-github"></i></a>
+      <a rel="license" property="http://creativecommons.org/ns#license" href="http://creativecommons.org/licenses/by/4.0/" ><img src="/rcds/public/img/cc-by.svg" alt="cc-by"/></a>
+    </p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <p>Note: It may be helpful to start with this 
+<a href="https://github.com/ds421/rcds/blob/master/website/lectures/fish-1.Rmd">.Rmd file with code from lecture</a></p>
+
+<h2 id="stock-collapses">Stock Collapses</h2>
+
+<p>Following Worm et al (2006), write a function of <code>current_stock</code> and <code>max_stock</code> that will determine if the current stock is less than 10% of the max stock observed.</p>
+
+<p>Define a new table that computes the total <code>ssb</code> and <code>TC</code> for each year for each species. Select only the columns we need: <code>"scientificname", "tsyear", "ssb_sum", "TC_sum"</code>.  </p>
+
+<ol>
+  <li>Add a new column to the table that contains for each species the maximum value of <code>TC</code> over all years.</li>
+  <li>Now use  <code>mutate</code> and this new column to compute whether or not each year should be marked as “collapsed” or not.  Add this information as another column in your table.  </li>
+  <li>Now compute a new table representing the fraction of taxa that are in the ‘collapsed’ state for each year in the data set.  </li>
+  <li>Weight your results by the total number of taxa in the data, </li>
+  <li>and plot this fraction over time</li>
+</ol>
+
+<h2 id="aggregate-trends-in-biomass-vs-catch">Aggregate trends in Biomass vs catch</h2>
+
+<p>Thus far our results are heavily influenced by the number of taxa for which data is available at any given year.  To get a better match to the Worm et al results, we will narrow down the data further:</p>
+
+<ol>
+  <li>Plot the data that aggregates the total spawning stock biomass (ssb) across all species over time between 1950 and 2006.</li>
+  <li>To avoid incomparable units, select only data from whichever unit (<code>MT</code> or <code>E03</code>) represents the larger fraction, or create separate plots for the two different measurement units.</li>
+  <li>Does this mean stocks are increasing, or that we are just assessing and exploiting more new stocks, even as old stocks decline?  Plot the total number of taxa assessed in each year of the data to compare.</li>
+  <li>To avoid this confounding variable, identify a core group of species that all have data for every year between 1950 and 2006. For this group, compute the fraction of the group that (a) are currently collapsed or (b) have ever experienced a collapse (cumulative collapse rate), as in the figure from Worm 2006. </li>
+</ol>
+
+<p><img src="http://berkeley.carlboettiger.info/espm-88b/img/worm2006.png" alt="" /></p>
+
+<h2 id="understanding-sensitivity">Understanding Sensitivity</h2>
+
+<p>How do your results differ between <code>ssb</code> (estimated spawning stock biomass) and <code>TC</code> (total catch)?</p>
+
+<p>Repeat this analysis with varying definitions of “collapsed” (e.g. a definition based on a deviation from mean instead of max stock, a different percentage, etc).  Can you construct a definition that is less sensitive to chance fluctuations?</p>
+
+
+    </div>
+
+  </body>
+</html>
