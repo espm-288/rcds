@@ -13,6 +13,9 @@ output:
 
 ```{r include=FALSE}
 library("tidyverse")
+library("stringr")
+library("jsonlite")
+library("httr")
 #library("printr")
 knitr::opts_chunk$set(comment=NA)
 ```
